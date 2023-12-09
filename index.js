@@ -203,10 +203,10 @@ function NavUl({ children , style = {} , className = "" , ...otherProps}){
     )
 }
 
-function RespHeading({ element = "h1" , style = {} , className = "", ...otherProps }){
-    if(element !== "h1" && element !== "h2" && element !== "h3" && element !== " h4" && element !== " h5" && element !== " h6 "){
-        throw new Error(" incorrect element value in RespHeading  it should be one of those (h1,h2,h3,h4,h5,h6)");
-    }else{
+function RespHeading({ element = "h1", style = {}, className = "", children, ...otherProps }) {
+    if (element !== "h1" && element !== "h2" && element !== "h3" && element !== "h4" && element !== "h5" && element !== "h6") {
+        throw new Error("Incorrect element value in RespHeading; it should be one of those (h1, h2, h3, h4, h5, h6)");
+    } else {
         const responsiveTypography = {
             h1: {
                 fontSize: 'clamp(32px, 4vw, 48px)',
@@ -227,19 +227,22 @@ function RespHeading({ element = "h1" , style = {} , className = "", ...otherPro
                 fontSize: 'clamp(14px, 1.5vw, 18px)',
             },
         };
+    
         const combinedStyles = {
             ...responsiveTypography[element],
             ...style,
+        };
+    
+        return React.createElement(
+            element,
+            {
+            style: combinedStyles,
+            className: `${className}`,
+            ...otherProps,
+            },
+            children
+        );
         }
-        return (
-            <element 
-            style={combinedStyles} 
-            className={`${className}`}
-            {...otherProps}>
-                {children}
-            </element>
-        )
-    }
 }
 
 function Circle({ children , style = {} , className = "", ...otherProps }){
