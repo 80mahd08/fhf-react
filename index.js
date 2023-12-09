@@ -92,13 +92,13 @@ function RespImg({ src, alt, style = {}, className = "", ...otherProps }) {
 }
 
 function RespVideo({ src, alt, style = {}, className = "", ...otherProps }){
-    const resVideo = {
+    const respVideo = {
         maxWidth: '100%',
         height: 'auto',
     };
 
     const combinedStyles = {
-        ...resVideo,
+        ...respVideo,
         ...style,
     };
     return (
@@ -206,7 +206,7 @@ function NavUl({ children , style = {} , className = "" , ...otherProps}){
 
 function RespHeading({ element = "h1" , style = {} , className = "", ...otherProps }){
     if(element !== "h1" && element !== "h2" && element !== "h3" && element !== " h4" && element !== " h5" && element !== " h6 "){
-        throw new Error(" incorrect element value inRespHeading  it should be one of those (h1,h2,h3,h4,h5,h6)");
+        throw new Error(" incorrect element value in RespHeading  it should be one of those (h1,h2,h3,h4,h5,h6)");
     }else{
         const responsiveTypography = {
             h1: {
@@ -466,7 +466,7 @@ UnstyledList.propTypes = {
     style: PropTypes.object,
 }
 
-NavUl.PropTypes = {
+NavUl.propTypes = {
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.elementType('li')),
         PropTypes.elementType('li'),
