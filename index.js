@@ -1,7 +1,6 @@
 //import part
 
 import "fhf/dist/css/FHF.min.css"
-import PropTypes from 'prop-types/checkPropTypes';
 import React from "react";
 import { isValidColor , isValidSize , isValidBorderStyle } from "./tools/validation"
 
@@ -375,6 +374,9 @@ const styles = {
         }
     },
     border : (size , type , color )=>{
+        if(!isValidSize(size) || !isValidBorderStyle(type) || !isValidColor(color)){
+            throw new Error("Invalid size , type or color value in border")
+        }
         return {
             border : `${size}px ${type} ${color}`
         }
@@ -399,99 +401,3 @@ export {
     ResBackgImg
 }
 
-// propsTypes part
-
-Container.propTypes = {
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string,
-    style: PropTypes.object,
-}
-
-FlexContainer.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.elementType(FlexItem)),
-        PropTypes.elementType(FlexItem)
-    ]).isRequired,
-    style: PropTypes.object,
-    className: PropTypes.string,
-};
-
-FlexItem.propTypes = {
-    children: PropTypes.node.isRequired,
-    style: PropTypes.object,
-    className: PropTypes.string,
-};
-
-DivV.propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-    visibleIn: PropTypes.string,
-    hiddenIn: PropTypes.string
-}
-
-RespImg.propTypes = {
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-};
-
-ResVideo.propTypes = {
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string,
-    style: PropTypes.object,
-    className: PropTypes.string,
-}
-
-RespGridFill.propTypes = {
-    children: PropTypes.node.isRequired,
-    size: PropTypes.number.isRequired,
-    gap: PropTypes.number,
-    className: PropTypes.string,
-};
-
-RespGridFit.propTypes = {
-    children: PropTypes.node.isRequired,
-    size: PropTypes.number.isRequired,
-    gap: PropTypes.number,
-    className: PropTypes.string,
-};
-
-UnstyledList.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.elementType('li')),
-        PropTypes.elementType('li'),
-    ]).isRequired,
-    className: PropTypes.string,
-    style: PropTypes.object,
-}
-
-NavUl.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.elementType('li')),
-        PropTypes.elementType('li'),
-    ]).isRequired,
-    className: PropTypes.string,
-    style: PropTypes.object,
-}
-
-RespHeading.propTypes = {
-    element: PropTypes.oneOf(["h1","h2","h3","h4","h5","h6"]).isRequired,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    children: PropTypes.node.isRequired,
-};
-
-ResBackgImg.propTypes = {
-    element: PropTypes.oneOf(["div","section","header","footer"]).isRequired,
-    style: PropTypes.object,
-    className: PropTypes.string,
-    children: PropTypes.node,
-    url: PropTypes.string.isRequired,
-}
-
-Circle.propTypes = {
-    children: PropTypes.node,
-    style: PropTypes.object,
-    className: PropTypes.string,
-};
