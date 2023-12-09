@@ -1,7 +1,7 @@
 //import part
 
 import "fhf/dist/css/FHF.min.css"
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types/checkPropTypes';
 import React from "react";
 import { isValidColor , isValidSize , isValidBorderStyle } from "./tools/validation"
 
@@ -459,8 +459,8 @@ RespGridFit.propTypes = {
 
 UnstyledList.propTypes = {
     children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node,
+        PropTypes.arrayOf(PropTypes.elementType('li')),
+        PropTypes.elementType('li'),
     ]).isRequired,
     className: PropTypes.string,
     style: PropTypes.object,
@@ -468,8 +468,8 @@ UnstyledList.propTypes = {
 
 NavUl.propTypes = {
     children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node,
+        PropTypes.arrayOf(PropTypes.elementType('li')),
+        PropTypes.elementType('li'),
     ]).isRequired,
     className: PropTypes.string,
     style: PropTypes.object,
