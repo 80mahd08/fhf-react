@@ -459,8 +459,8 @@ RespGridFit.propTypes = {
 
 UnstyledList.propTypes = {
     children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.elementType('li')),
-        PropTypes.elementType('li'),
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node,
     ]).isRequired,
     className: PropTypes.string,
     style: PropTypes.object,
@@ -468,8 +468,8 @@ UnstyledList.propTypes = {
 
 NavUl.propTypes = {
     children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.elementType('li')),
-        PropTypes.elementType('li'),
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node,
     ]).isRequired,
     className: PropTypes.string,
     style: PropTypes.object,
