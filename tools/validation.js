@@ -24,6 +24,42 @@ const isValidColor = (color)=> {
     const allowedStyles = ['capitalize', 'uppercase', 'lowercase', 'none'];
     return allowedStyles.includes(type);
   }
+  const isValidJContent = (type) => {
+    const allowedStyles = [
+      "flex-start",
+      "flex-end",
+      "center",
+      "space-between",
+      "space-around",
+      "space-evenly",
+      "start",
+      "end",
+      "left",
+      "right",
+      "normal",
+      "stretch"
+    ];
+    return allowedStyles.includes(type);
+  }
+
+  const isValidAContent = (type) => {
+    const allowedStyles = [
+      "flex-start",
+      "flex-end",
+      "center",
+      "space-between",
+      "space-around",
+      "space-evenly",
+      "start",
+      "end",
+      "left",
+      "right",
+      "normal",
+      "stretch"
+    ];
+    return allowedStyles.includes(type);
+
+  }
   
-  export { isValidColor, isValidSize, isValidBorderStyle , isValidTextDecoration , isValidTextTransform };
+  export { isValidColor, isValidSize, isValidBorderStyle , isValidTextDecoration , isValidTextTransform , isValidJContent };
   

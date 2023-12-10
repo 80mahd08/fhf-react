@@ -2,7 +2,7 @@
 
 import "fhf/dist/css/FHF.min.css"
 import React from "react";
-import { isValidColor , isValidSize , isValidBorderStyle , isValidTextDecoration , isValidTextTransform } from "./tools/validation"
+import { isValidColor , isValidSize , isValidBorderStyle , isValidTextDecoration , isValidTextTransform , isValidJContent } from "./tools/validation"
 
 // component part
 
@@ -600,20 +600,62 @@ const styles = {
     },
     transBg: {
         backgroundColor: 'transparent',
-    }
+    },
+    rounded: {
+        borderRadius: '5px'
+    },
+    extraRounded: {
+        borderRadius: '25px'
+    },
+    megaRounded: {
+        borderRadius: '45px'
+    },
+    superRounded: {
+        borderRadius: '65px'
+    },
+    ultraRounded: {
+        borderRadius: '85px'
+    },
+    extremeRounded: {
+        borderRadius: '105px'
+    },
+    radicalRounded: {
+        borderRadius: '125px'
+    },
+    hyperRounded: {
+        borderRadius: '145px'
+    },
+    ultimateRounded: {
+        borderRadius: '165px'
+    },
+    maxRounded: {
+        borderRadius: '185px'
+    },
+    beyondRounded: {
+        borderRadius: '205px'
+    },
+    flexJContent: (type)=>{
+        if (!isValidJContent(type)) {
+            throw new Error("Invalid value in flexJContent");
+        }
+        return {
+            justifyContent: type,
+        }
+        
+    },
+    flexAContent: (type)=>{
+        if (!isValidAContent(type)) {
+            throw new Error("Invalid value in flexAContent");
+        }
+        return {
+            alignItems: type,
+        }
+        
+    },
 
 }
 
-const borderRadiusName  = ["rounded" , "extraRounded" , "megaRounded" , "superRounded" , "ultraRounded" , "extremeRounded" , "redicalRounded" , "hyperRounded" , "ultimateRounded" , "maxRounded" , "beyondRounded"]
 
-let borderRadiusCont = 5
-
-for (let i = 0; i < borderRadiusName.length; i++) {
-    styles[borderRadiusName[i]] = {
-        borderRadius: `${borderRadiusCont}px`,
-    }
-    borderRadiusCont += 20
-}
 
 
 export {
