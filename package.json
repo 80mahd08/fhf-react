@@ -1,6 +1,6 @@
 {
   "name": "fhf-react",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "this react framework has  React components and styles designed to facilitate the creation of responsive and flexible web layouts. Tailored for ease of use and versatility, the framework includes components for containers, flexible layouts, responsive images and videos, grid systems, navigation, and more. By incorporating predefined styles, the framework simplifies common layout tasks such as centering content, text alignment, floats, and flexbox arrangements. With a focus on responsiveness, the framework adapts to different screen sizes and provides a set of utility functions for managing visibility based on screen dimensions. Whether you're building a simple webpage or a complex web application, this framework aims to streamline the development process by offering a cohesive set of components and styles for creating modern and responsive user interfaces.",
   "main": "index.js",
   "type": "module",

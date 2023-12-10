@@ -598,6 +598,10 @@ const styles = {
             textTransform: value,
         }
     },
+    transBg: {
+        backgroundColor: 'transparent',
+    }
+
 }
 
 const borderRadiusName  = ["rounded" , "extraRounded" , "megaRounded" , "superRounded" , "ultraRounded" , "extremeRounded" , "redicalRounded" , "hyperRounded" , "ultimateRounded" , "maxRounded" , "beyondRounded"]
@@ -611,7 +615,6 @@ for (let i = 0; i < borderRadiusName.length; i++) {
     borderRadiusCont += 20
 }
 
-console.log(styles);
 
 export {
     styles,
