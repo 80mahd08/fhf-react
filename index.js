@@ -2,7 +2,7 @@
 
 import "fhf/dist/css/FHF.min.css"
 import React from "react";
-import { isValidColor , isValidSize , isValidBorderStyle } from "./tools/validation"
+import { isValidColor , isValidSize , isValidBorderStyle , isValidTextDecoration , isValidTextTransform } from "./tools/validation"
 
 // component part
 
@@ -75,6 +75,9 @@ function DivV({ children, className = "" , style = {} , visibleIn = "", hiddenIn
 }
 
 function RespImg({ src, alt, style = {}, className = "", ...otherProps }) {
+    if (src === undefined || src === "") {
+        throw new Error("src cannot be undefined or empty");
+    }
     const respImg = {
         maxWidth: '100%',
         height: 'auto',
@@ -90,7 +93,10 @@ function RespImg({ src, alt, style = {}, className = "", ...otherProps }) {
     );
 }
 
-function RespVideo({ src, alt, style = {}, className = "", ...otherProps }){
+function RespVideo({ src = "", alt, style = {}, className = "", ...otherProps }){
+    if(src === undefined || src === ""){
+        throw new Error("src cannot be undefined or empty");
+    }
     const respVideo = {
         maxWidth: '100%',
         height: 'auto',
@@ -105,17 +111,19 @@ function RespVideo({ src, alt, style = {}, className = "", ...otherProps }){
     );
 }
 
-function RespGridFill({ children, size , style = {} , gap = "" , className = "" , ...otherProps }){
-
+function RespGridFill({ children, size = 0 , style = {} , gap = 0 , className = "" , ...otherProps }){
+    if (size === null || size === undefined || size === 0) {
+        throw new Error("size cannot be null or undefined or 0");
+    }
     const withOutGap = {
         ...style,
         display : "grid", 
-        gridTemplateColumns: `repeat(auto-fill, minmax(${size}, 1fr))` 
+        gridTemplateColumns: `repeat(auto-fill, minmax(${size}px, 1fr))` 
     }
     const withGap = {
         ...style,
         display : "grid", 
-        gridTemplateColumns: `repeat(auto-fill, minmax(${size}, 1fr))`,
+        gridTemplateColumns: `repeat(auto-fill, minmax(${size}px, 1fr))`,
         gap: `${gap}px`,
     }
 
@@ -135,17 +143,19 @@ function RespGridFill({ children, size , style = {} , gap = "" , className = "" 
 
 }
 
-function RespGridFit({ children, size , style = {} , gap = "" , className = "" , ...otherProps }){
-
+function RespGridFit({ children, size = 0 , style = {} , gap = 0 , className = "" , ...otherProps }){
+    if (size === null || size === undefined || size === 0) {
+        throw new Error("size cannot be null or undefined or 0");
+    }
     const withOutGap = {
         ...style,
         display : "grid", 
-        gridTemplateColumns: `repeat(auto-fit, minmax(${size}, 1fr))` 
+        gridTemplateColumns: `repeat(auto-fit, minmax(${size}px, 1fr))` 
     }
     const withGap = {
         ...style,
         display : "grid", 
-        gridTemplateColumns: `repeat(auto-fit, minmax(${size}, 1fr))`,
+        gridTemplateColumns: `repeat(auto-fit, minmax(${size}px, 1fr))`,
         gap: `${gap}px`,
     }
 
@@ -278,13 +288,14 @@ function ResBackgImg({ element = "div" , url = '' ,children , style = {} , class
             ...respBackgImg,
             ...style
         }
-        return (
-            <element 
-            style={combinedStyles} 
-            className={`${className}`}
-            {...otherProps}>
-                {children}
-            </element>
+        return React.createElement(
+            element,
+            {
+                style: combinedStyles,
+                className: `${className}`,
+                ...otherProps,
+            },
+            children
         )
     }
 }
@@ -383,8 +394,224 @@ const styles = {
         return {
             border : `${size}px ${type} ${color}`
         }
-    }
+    },
+    margin: (size) => {
+        if(!isValidSize(size)){
+            throw new Error("Invalid size value in margin")
+        }
+        return {
+            margin: `${size}px`,
+        }
+    },
+    marginTop: (size) => {
+        if(!isValidSize(size)){
+            throw new Error("Invalid size value in marginTop")
+        }
+        return {
+            marginTop: `${size}px`,
+        }
+    },
+    marginLeft: (size) => {
+        if(!isValidSize(size)){
+            throw new Error("Invalid size value in marginLeft")
+        }
+        return {
+            marginLeft: `${size}px`,
+        }
+    },
+    marginRight: (size) => {
+        if(!isValidSize(size)){
+            throw new Error("Invalid size value in marginRight")
+        }
+        return {
+            marginRight: `${size}px`,
+        }
+    },
+    marginBottom: (size) => {
+        if(!isValidSize(size)){
+            throw new Error("Invalid size value in marginBottom")
+        }
+        return {
+            marginBottom: `${size}px`,
+        }
+    },
+    padding: (size) => {
+        if(!isValidSize(size)){
+            throw new Error("Invalid size value in padding")
+        }
+        return {
+            padding: `${size}px`,
+        }
+    },
+    paddingTop: (size) => {
+        if(!isValidSize(size)){
+            throw new Error("Invalid size value in paddingTop")
+        }
+        return {
+            paddingTop: `${size}px`,
+        }
+    },
+    paddingLeft: (size) => {
+        if(!isValidSize(size)){
+            throw new Error("Invalid size value in paddingLeft")
+        }
+        return {
+            paddingLeft: `${size}px`,
+        }
+    },
+    paddingRight: (size) => {
+        if(!isValidSize(size)){
+            throw new Error("Invalid size value in paddingRight")
+        }
+        return {
+            paddingRight: `${size}px`,
+        }
+    },
+    paddingBottom: (size) => {
+        if(!isValidSize(size)){
+            throw new Error("Invalid size value in paddingBottom")
+        }
+        return {
+            paddingBottom: `${size}px`,
+        }
+    },
+    respMargin: (size1 , size2) => {
+        if(!isValidSize(size1) || !isValidSize(size2)){
+            throw new Error("Invalid size value in respMargin")
+        }
+        return {
+            margin: `clamp( ${size1}px , 5vw , ${size2}px )`,
+        }
+    
+    },
+    respMarginTop: (size1 , size2) => {
+        if(!isValidSize(size1) || !isValidSize(size2)){
+            throw new Error("Invalid size value in respMarginTop")
+        }
+        return {
+            marginTop: `clamp( ${size1}px , 5vw , ${size2}px )`,
+        }
+    },
+    respMarginLeft: (size1, size2) => {
+        if(!isValidSize(size1) ||!isValidSize(size2)){
+            throw new Error("Invalid size value in respMarginLeft")
+        }
+        return {
+            marginLeft: `clamp( ${size1}px, 5vw, ${size2}px )`,
+        }
+    },
+    respMarginRight: (size1, size2) => {
+        if(!isValidSize(size1) ||!isValidSize(size2)){
+            throw new Error("Invalid size value in respMarginRight")
+        }
+        return {
+            marginRight: `clamp( ${size1}px, 5vw, ${size2}px )`,
+        }
+    },
+    respMarginBottom: (size1, size2) => {
+        if(!isValidSize(size1) ||!isValidSize(size2)){
+            throw new Error("Invalid size value in respMarginBottom")
+        }
+        return {
+            marginBottom: `clamp( ${size1}px, 5vw, ${size2}px )`,
+        }
+    },
+    respPadding: (size1, size2) => {
+        if(!isValidSize(size1) ||!isValidSize(size2)){
+            throw new Error("Invalid size value in respPadding")
+        }
+        return {
+            padding: `clamp( ${size1}px, 5vw, ${size2}px )`,
+        }
+    },
+    respPaddingTop: (size1, size2) => {
+        if(!isValidSize(size1) ||!isValidSize(size2)){
+            throw new Error("Invalid size value in respPaddingTop")
+        }
+        return {
+            paddingTop: `clamp( ${size1}px, 5vw, ${size2}px )`,
+        }
+    },
+    respPaddingLeft: (size1, size2) => {
+        if(!isValidSize(size1) ||!isValidSize(size2)){
+            throw new Error("Invalid size value in respPaddingLeft")
+        }
+        return {
+            paddingLeft: `clamp( ${size1}px, 5vw, ${size2}px )`,
+        }
+    },
+    respPaddingRight: (size1, size2) => {
+        if(!isValidSize(size1) ||!isValidSize(size2)){
+            throw new Error("Invalid size value in respPaddingRight")
+        }
+        return {
+            paddingRight: `clamp( ${size1}px, 5vw, ${size2}px )`,
+        }
+    },
+    respPaddingBottom: (size1, size2) => {
+        if(!isValidSize(size1) ||!isValidSize(size2)){
+            throw new Error("Invalid size value in respPaddingBottom")
+        }
+        return {
+            paddingBottom: `clamp( ${size1}px, 5vw, ${size2}px )`,
+        }
+    },
+    marginNone: {
+        margin: 0,
+    },
+    paddingNone: {
+        padding: 0,
+    },
+    borderNone: {
+        border: 0,
+    },
+    borderRadiusNone: {
+        borderRadius: 0,
+    },
+    boxShadowNone: {
+        boxShadow: 'none',
+    },
+    textShadowNone: {
+        textShadow: 'none',
+    },
+    zIndex: (value) => {
+        if(!isValidSize(value)){
+            throw new Error("Invalid value in zIndex")
+        }
+        return {
+            zIndex: value,
+        }
+    },
+    textDeco: (value) => {
+        if(!isValidTextDecoration(value)){
+            throw new Error("Invalid value in textDeco")
+        }
+        return {
+            textDecoration: value,
+        }
+    },
+    textTrans: (value) => {
+        if(!isValidTextTransform(value)){
+            throw new Error("Invalid value in textTrans")
+        }
+        return {
+            textTransform: value,
+        }
+    },
 }
+
+const borderRadiusName  = ["rounded" , "extraRounded" , "megaRounded" , "superRounded" , "ultraRounded" , "extremeRounded" , "redicalRounded" , "hyperRounded" , "ultimateRounded" , "maxRounded" , "beyondRounded"]
+
+let borderRadiusCont = 5
+
+for (let i = 0; i < borderRadiusName.length; i++) {
+    styles[borderRadiusName[i]] = {
+        borderRadius: `${borderRadiusCont}px`,
+    }
+    borderRadiusCont += 20
+}
+
+console.log(styles);
 
 export {
     styles,
