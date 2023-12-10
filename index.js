@@ -2,7 +2,7 @@
 
 import "fhf/dist/css/FHF.min.css"
 import React from "react";
-import { isValidColor , isValidSize , isValidBorderStyle , isValidTextDecoration , isValidTextTransform , isValidJContent } from "./tools/validation"
+import { isValidColor , isValidSize , isValidBorderStyle , isValidTextDecoration , isValidTextTransform , isValidJContent , isValidAContent} from "./tools/validation"
 
 // component part
 

@@ -61,5 +61,5 @@ const isValidColor = (color)=> {
 
   }
   
-  export { isValidColor, isValidSize, isValidBorderStyle , isValidTextDecoration , isValidTextTransform , isValidJContent };
+  export { isValidColor, isValidSize, isValidBorderStyle , isValidTextDecoration , isValidTextTransform , isValidJContent , isValidAContent };
   
