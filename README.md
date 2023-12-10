@@ -1,6 +1,8 @@
 <h1 style="text-align:center">FHF-REACT</h1>
 
-<img src='./logo.png'/>
+<p align="center">
+  <img width="300" src="https://raw.githubusercontent.com/80mahd08/fhf-react/main/logo.png" />
+</p>
 
 ## Introduction
 
