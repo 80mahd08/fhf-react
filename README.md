@@ -1,4 +1,6 @@
-# FHF-react
+<h1 style="text-align:center">FHF-REACT</h1>
+
+<img src='./logo.png'/>
 
 ## Introduction
 
