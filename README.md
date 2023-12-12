@@ -149,9 +149,9 @@ A responsive background image component for specified HTML elements.
 A responsive background image component for specified HTML elements.
 
 ```jsx
-import { style } from "fhf-react";
+import style  from "fhf-react/styles";
 
-<div style={style.centerPosition}>
+<div style={{...style.centerPosition , ...style.floatLeft}}>
   {/* Your centered content goes here */}
 </div>
 ```
