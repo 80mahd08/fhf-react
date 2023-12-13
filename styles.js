@@ -1278,6 +1278,143 @@ const styles = {
       ref: ref,
     };
   },
+  // Style: bgWarningHover
+  bgWarningHover: () => {
+    const { ref, isHovered } = useHover();
+
+    return {
+      /**
+       * Object that represents the CSS styles for setting the warning background color on hover with white text.
+       */
+      style: isHovered
+       ? {
+            backgroundColor: "#f0ad4e",
+            color: "#fff",
+          }
+        : {},
+      ref: ref,
+    };
+  },
+  // Style: bgInfoHover
+  bgInfoHover: () => {
+    const { ref, isHovered } = useHover();
+
+    return {
+      /**
+       * Object that represents the CSS styles for setting the info background color on hover with white text.
+       */
+      style: isHovered
+       ? {
+            backgroundColor: "#17a2b8",
+            color: "#fff",
+          }
+        : {},
+      ref: ref,
+    };
+  },
+  // Style: bgSecondaryHover
+  bgSecondaryHover: () => {
+    const { ref, isHovered } = useHover();
+
+    return {
+      /**
+       * Object that represents the CSS styles for setting the secondary background color on hover with white text.
+       */
+      style: isHovered
+      ? {
+            backgroundColor: "#6c757d",
+            color: "#fff",
+          }
+        : {},
+      ref: ref,
+    };
+  },
+  // Style: bgLightHover
+  bgLightHover: () => {
+    const { ref, isHovered } = useHover();
+
+    return {
+      /**
+       * Object that represents the CSS styles for setting the light background color on hover with white text.
+       */
+      style: isHovered
+      ? {
+            backgroundColor: "#f8f9fa",
+            color: "#fff",
+          }
+        : {},
+      ref: ref,
+    };
+  },
+  // Style: bgDarkHover
+  bgDarkHover: () => {
+    const { ref, isHovered } = useHover();
+
+    return {
+      /**
+       * Object that represents the CSS styles for setting the dark background color on hover with white text.
+       */
+      style: isHovered
+      ? {
+            backgroundColor: "#343a40",
+            color: "#fff",
+          }
+        : {},
+      ref: ref,
+    };
+  },
+  // Style: bgWhiteHover
+  bgWhiteHover: () => {
+    const { ref, isHovered } = useHover();
+
+    return {
+      /**
+       * Object that represents the CSS styles for setting the white background color on hover with white text.
+       */
+      style: isHovered
+     ? {
+            backgroundColor: "#fff",
+            color: "#000",
+          }
+        : {},
+      ref: ref,
+    };
+  },
+  // Style: bgTransparentHover
+  bgTransparentHover: () => {
+    const { ref, isHovered } = useHover();
+
+    return {
+      /**
+       * Object that represents the CSS styles for setting the transparent background color on hover with white text.
+       */
+      style: isHovered
+    ? {
+            backgroundColor: "transparent",
+            color: "#000",
+          }
+        : {},
+      ref: ref,
+    };
+  },
+  // Style: bgPrimaryActive
+  bgPrimaryActive: () => {
+    const { ref, isActive } = useHover();
+
+    return {
+      /**
+       * Object that represents the CSS styles for setting the primary background color on active with white text.
+       */
+      style: isActive
+      ? {
+            backgroundColor: "#0056b3",
+            color: "#fff",
+          }
+        : {},
+      ref: ref,
+    };
+  },
+  
 };
 
 /**
