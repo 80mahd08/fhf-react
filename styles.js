@@ -1,5 +1,13 @@
 import { useHover } from ".";
-import { isValidColor, isValidSize, isValidBorderStyle , isValidTextDecoration , isValidTextTransform , isValidJContent , isValidAContent } from "./tools/validation"
+import {
+  isValidColor,
+  isValidSize,
+  isValidBorderStyle,
+  isValidTextDecoration,
+  isValidTextTransform,
+  isValidJContent,
+  isValidAContent,
+} from "./tools/validation";
 
 const styles = {
   // Positioning
@@ -1287,7 +1295,7 @@ const styles = {
        * Object that represents the CSS styles for setting the warning background color on hover with white text.
        */
       style: isHovered
-       ? {
+        ? {
             backgroundColor: "#f0ad4e",
             color: "#fff",
           }
@@ -1304,7 +1312,7 @@ const styles = {
        * Object that represents the CSS styles for setting the info background color on hover with white text.
        */
       style: isHovered
-       ? {
+        ? {
             backgroundColor: "#17a2b8",
             color: "#fff",
           }
@@ -1321,7 +1329,7 @@ const styles = {
        * Object that represents the CSS styles for setting the secondary background color on hover with white text.
        */
       style: isHovered
-      ? {
+        ? {
             backgroundColor: "#6c757d",
             color: "#fff",
           }
@@ -1338,7 +1346,7 @@ const styles = {
        * Object that represents the CSS styles for setting the light background color on hover with white text.
        */
       style: isHovered
-      ? {
+        ? {
             backgroundColor: "#f8f9fa",
             color: "#fff",
           }
@@ -1355,7 +1363,7 @@ const styles = {
        * Object that represents the CSS styles for setting the dark background color on hover with white text.
        */
       style: isHovered
-      ? {
+        ? {
             backgroundColor: "#343a40",
             color: "#fff",
           }
@@ -1372,7 +1380,7 @@ const styles = {
        * Object that represents the CSS styles for setting the white background color on hover with white text.
        */
       style: isHovered
-     ? {
+        ? {
             backgroundColor: "#fff",
             color: "#000",
           }
@@ -1389,7 +1397,7 @@ const styles = {
        * Object that represents the CSS styles for setting the transparent background color on hover with white text.
        */
       style: isHovered
-    ? {
+        ? {
             backgroundColor: "transparent",
             color: "#000",
           }
@@ -1406,7 +1414,7 @@ const styles = {
        * Object that represents the CSS styles for setting the primary background color on active with white text.
        */
       style: isActive
-      ? {
+        ? {
             backgroundColor: "#0056b3",
             color: "#fff",
           }
@@ -1414,7 +1422,6 @@ const styles = {
       ref: ref,
     };
   },
-  
 };
 
 /**
@@ -1424,11 +1431,6 @@ const styles = {
  */
 const merge = (...args) => {
   return Object.assign({}, ...args);
-}
-
-
-
-export{ 
-  styles,
-  merge,
 };
+
+export { styles, merge };
