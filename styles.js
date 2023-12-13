@@ -1280,4 +1280,18 @@ const styles = {
   },
 };
 
-export default styles;
+/**
+ * Function that returns a new object that is the combination of two or more existing objects.
+ * @param  {...Object} objects - The objects to merge.
+ * @returns {Object} The merged object.
+ */
+const merge = (...args) => {
+  return Object.assign({}, ...args);
+}
+
+
+
+export{ 
+  styles,
+  merge,
+};
