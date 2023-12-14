@@ -1,4 +1,4 @@
-import { useHover } from ".";
+import { useHover, useActive } from "./index";
 import {
   isValidColor,
   isValidSize,
@@ -152,7 +152,7 @@ const styles = {
   },
 
   // Text and Background Styles
-  fontColor: (color) => {
+  fontColor: (color: string): object => {
     /**
      * Function that returns CSS styles for setting the font color.
      * @param {string} color - The color value.
@@ -167,7 +167,7 @@ const styles = {
       throw new Error("Invalid color value in fontColor");
     }
   },
-  bg: (color) => {
+  bg: (color: string): object => {
     /**
      * Function that returns CSS styles for setting the background color.
      * @param {string} color - The color value.
@@ -183,7 +183,7 @@ const styles = {
     }
   },
   // Border Styles
-  border: (size, type, color) => {
+  border: (size: number, type : string, color : string) => {
     /**
      * Function that returns CSS styles for creating a border.
      * @param {number} size - The size of the border in pixels.
@@ -205,7 +205,7 @@ const styles = {
   },
 
   // Margin Styles
-  margin: (size) => {
+  margin: (size: number) => {
     /**
      * Function that returns CSS styles for setting the margin.
      * @param {number} size - The size of the margin in pixels.
@@ -219,7 +219,7 @@ const styles = {
       margin: `${size}px`,
     };
   },
-  marginTop: (size) => {
+  marginTop: (size: number) => {
     /**
      * Function that returns CSS styles for setting the top margin.
      * @param {number} size - The size of the top margin in pixels.
@@ -233,10 +233,52 @@ const styles = {
       marginTop: `${size}px`,
     };
   },
-  // ... (similar comments for other margin styles)
+  marginBottom: (size: number) => {
+    /**
+     * Function that returns CSS styles for setting the bottom margin.
+     * @param {number} size - The size of the bottom margin in pixels.
+     * @returns {Object} CSS styles for the bottom margin.
+     * @throws {Error} Throws an error if the size value is invalid.
+     */
+    if (!isValidSize(size)) {
+      throw new Error("Invalid size value in marginBottom");
+    }
+    return {
+      marginBottom: `${size}px`,
+    };
+  },
+  marginLeft: (size: number) => {
+    /**
+     * Function that returns CSS styles for setting the left margin.
+     * @param {number} size - The size of the left margin in pixels.
+     * @returns {Object} CSS styles for the left margin.
+     * @throws {Error} Throws an error if the size value is invalid.
+     */
+    if (!isValidSize(size)) {
+      throw new Error("Invalid size value in marginLeft");
+    }
+    return {
+      marginLeft: `${size}px`,
+    };
+  },
+  marginRight: (size: number) => {
+    /**
+     * Function that returns CSS styles for setting the right margin.
+     * @param {number} size - The size of the right margin in pixels.
+     * @returns {Object} CSS styles for the right margin.
+     * @throws {Error} Throws an error if the size value is invalid.
+     */
+    if (!isValidSize(size)) {
+      throw new Error("Invalid size value in marginRight");
+    }
+    return {
+      marginRight: `${size}px`,
+    };
+  },
+
 
   // Padding Styles
-  padding: (size) => {
+  padding: (size: number) => {
     /**
      * Function that returns CSS styles for setting the padding.
      * @param {number} size - The size of the padding in pixels.
@@ -250,161 +292,215 @@ const styles = {
       padding: `${size}px`,
     };
   },
-  // ... (similar comments for other padding styles)
-
+  paddingTop: (size: number) => {
+    /**
+     * Function that returns CSS styles for setting the top padding.
+     * @param {number} size - The size of the top padding in pixels.
+     * @returns {Object} CSS styles for the top padding.
+     * @throws {Error} Throws an error if the size value is invalid.
+     */
+    if (!isValidSize(size)) {
+      throw new Error("Invalid size value in paddingTop");
+    }
+    return {
+      paddingTop: `${size}px`,
+    };
+  },
+  paddingBottom: (size: number) => {
+    /**
+     * Function that returns CSS styles for setting the bottom padding.
+     * @param {number} size - The size of the bottom padding in pixels.
+     * @returns {Object} CSS styles for the bottom padding.
+     * @throws {Error} Throws an error if the size value is invalid.
+     */
+    if (!isValidSize(size)) {
+      throw new Error("Invalid size value in paddingBottom");
+    }
+    return {
+      paddingBottom: `${size}px`,
+    };
+  },
+  paddingLeft: (size: number) => {
+    /**
+     * Function that returns CSS styles for setting the left padding.
+     * @param {number} size - The size of the left padding in pixels.
+     * @returns {Object} CSS styles for the left padding.
+     * @throws {Error} Throws an error if the size value is invalid.
+     */
+    if (!isValidSize(size)) {
+      throw new Error("Invalid size value in paddingLeft");
+    }
+    return {
+      paddingLeft: `${size}px`,
+    };
+  },
+  paddingRight: (size: number) => {
+    /**
+     * Function that returns CSS styles for setting the right padding.
+     * @param {number} size - The size of the right padding in pixels.
+     * @returns {Object} CSS styles for the right padding.
+     * @throws {Error} Throws an error if the size value is invalid.
+     */
+    if (!isValidSize(size)) {
+      throw new Error("Invalid size value in paddingRight");
+    }
+    return {
+      paddingRight: `${size}px`,
+    };
+  },
   // Responsive Margin Styles
-  respMargin: (size1, size2) => {
+  respMargin: (min: number, max: number) => {
     /**
      * Function that returns responsive CSS styles for setting the margin.
-     * @param {number} size1 - The minimum size of the margin in pixels.
-     * @param {number} size2 - The maximum size of the margin in pixels.
+     * @param {number} min - The minimum size of the margin in pixels.
+     * @param {number} max - The maximum size of the margin in pixels.
      * @returns {Object} CSS styles for the responsive margin.
-     * @throws {Error} Throws an error if the size1 or size2 values are invalid.
+     * @throws {Error} Throws an error if the min or max values are invalid.
      */
-    if (!isValidSize(size1) || !isValidSize(size2)) {
+    if (!isValidSize(min) || !isValidSize(min)) {
       throw new Error("Invalid size value in respMargin");
     }
     return {
-      margin: `clamp(${size1}px, 5vw, ${size2}px)`,
+      margin: `clamp(${min}px, 5vw, ${min}px)`,
     };
   },
   // Responsive Margin Styles
-  respMarginTop: (size1, size2) => {
+  respMarginTop: (min: number, max: number) => {
     /**
      * Function that returns responsive CSS styles for setting the top margin.
-     * @param {number} size1 - The minimum size of the top margin in pixels.
-     * @param {number} size2 - The maximum size of the top margin in pixels.
+     * @param {number} min - The minimum size of the top margin in pixels.
+     * @param {number} max - The maximum size of the top margin in pixels.
      * @returns {Object} CSS styles for the responsive top margin.
-     * @throws {Error} Throws an error if the size1 or size2 values are invalid.
+     * @throws {Error} Throws an error if the min or max values are invalid.
      */
-    if (!isValidSize(size1) || !isValidSize(size2)) {
+    if (!isValidSize(min) || !isValidSize(max)) {
       throw new Error("Invalid size value in respMarginTop");
     }
     return {
-      marginTop: `clamp(${size1}px, 5vw, ${size2}px)`,
+      marginTop: `clamp(${min}px, 5vw, ${max}px)`,
     };
   },
-  respMarginLeft: (size1, size2) => {
+  respMarginLeft: (min: number, max: number) => {
     /**
      * Function that returns responsive CSS styles for setting the left margin.
-     * @param {number} size1 - The minimum size of the left margin in pixels.
-     * @param {number} size2 - The maximum size of the left margin in pixels.
+     * @param {number} min - The minimum size of the left margin in pixels.
+     * @param {number} max - The maximum size of the left margin in pixels.
      * @returns {Object} CSS styles for the responsive left margin.
-     * @throws {Error} Throws an error if the size1 or size2 values are invalid.
+     * @throws {Error} Throws an error if the min or max values are invalid.
      */
-    if (!isValidSize(size1) || !isValidSize(size2)) {
+    if (!isValidSize(min) || !isValidSize(max)) {
       throw new Error("Invalid size value in respMarginLeft");
     }
     return {
-      marginLeft: `clamp(${size1}px, 5vw, ${size2}px)`,
+      marginLeft: `clamp(${min}px, 5vw, ${max}px)`,
     };
   },
-  respMarginRight: (size1, size2) => {
+  respMarginRight: (min: number, max : number) => {
     /**
      * Function that returns responsive CSS styles for setting the right margin.
-     * @param {number} size1 - The minimum size of the right margin in pixels.
-     * @param {number} size2 - The maximum size of the right margin in pixels.
+     * @param {number} min - The minimum size of the right margin in pixels.
+     * @param {number} max - The maximum size of the right margin in pixels.
      * @returns {Object} CSS styles for the responsive right margin.
-     * @throws {Error} Throws an error if the size1 or size2 values are invalid.
+     * @throws {Error} Throws an error if the min or max values are invalid.
      */
-    if (!isValidSize(size1) || !isValidSize(size2)) {
+    if (!isValidSize(min) || !isValidSize(max)) {
       throw new Error("Invalid size value in respMarginRight");
     }
     return {
-      marginRight: `clamp(${size1}px, 5vw, ${size2}px)`,
+      marginRight: `clamp(${min}px, 5vw, ${max}px)`,
     };
   },
-  respMarginBottom: (size1, size2) => {
+  respMarginBottom: (min: number, max: number) => {
     /**
      * Function that returns responsive CSS styles for setting the bottom margin.
-     * @param {number} size1 - The minimum size of the bottom margin in pixels.
-     * @param {number} size2 - The maximum size of the bottom margin in pixels.
+     * @param {number} min - The minimum size of the bottom margin in pixels.
+     * @param {number} max - The maximum size of the bottom margin in pixels.
      * @returns {Object} CSS styles for the responsive bottom margin.
-     * @throws {Error} Throws an error if the size1 or size2 values are invalid.
+     * @throws {Error} Throws an error if the min or max values are invalid.
      */
-    if (!isValidSize(size1) || !isValidSize(size2)) {
+    if (!isValidSize(min) || !isValidSize(max)) {
       throw new Error("Invalid size value in respMarginBottom");
     }
     return {
-      marginBottom: `clamp(${size1}px, 5vw, ${size2}px)`,
+      marginBottom: `clamp(${min}px, 5vw, ${max}px)`,
     };
   },
 
   // Responsive Padding Styles
-  respPadding: (size1, size2) => {
+  respPadding: (min: number, max: number) => {
     /**
      * Function that returns responsive CSS styles for setting the padding.
-     * @param {number} size1 - The minimum size of the padding in pixels.
-     * @param {number} size2 - The maximum size of the padding in pixels.
+     * @param {number} min - The minimum size of the padding in pixels.
+     * @param {number} max - The maximum size of the padding in pixels.
      * @returns {Object} CSS styles for the responsive padding.
-     * @throws {Error} Throws an error if the size1 or size2 values are invalid.
+     * @throws {Error} Throws an error if the min or max values are invalid.
      */
-    if (!isValidSize(size1) || !isValidSize(size2)) {
+    if (!isValidSize(min) || !isValidSize(max)) {
       throw new Error("Invalid size value in respPadding");
     }
     return {
-      padding: `clamp(${size1}px, 5vw, ${size2}px)`,
+      padding: `clamp(${min}px, 5vw, ${max}px)`,
     };
   },
-  respPaddingTop: (size1, size2) => {
+  respPaddingTop: (min: number, max: number) => {
     /**
      * Function that returns responsive CSS styles for setting the top padding.
-     * @param {number} size1 - The minimum size of the top padding in pixels.
-     * @param {number} size2 - The maximum size of the top padding in pixels.
+     * @param {number} min - The minimum size of the top padding in pixels.
+     * @param {number} max - The maximum size of the top padding in pixels.
      * @returns {Object} CSS styles for the responsive top padding.
-     * @throws {Error} Throws an error if the size1 or size2 values are invalid.
+     * @throws {Error} Throws an error if the min or max values are invalid.
      */
-    if (!isValidSize(size1) || !isValidSize(size2)) {
+    if (!isValidSize(min) || !isValidSize(max)) {
       throw new Error("Invalid size value in respPaddingTop");
     }
     return {
-      paddingTop: `clamp(${size1}px, 5vw, ${size2}px)`,
+      paddingTop: `clamp(${min}px, 5vw, ${max}px)`,
     };
   },
   // Responsive Padding Styles
-  respPaddingLeft: (size1, size2) => {
+  respPaddingLeft: (min: number, max: number) => {
     /**
      * Function that returns responsive CSS styles for setting the left padding.
-     * @param {number} size1 - The minimum size of the left padding in pixels.
-     * @param {number} size2 - The maximum size of the left padding in pixels.
+     * @param {number} min - The minimum size of the left padding in pixels.
+     * @param {number} max - The maximum size of the left padding in pixels.
      * @returns {Object} CSS styles for the responsive left padding.
-     * @throws {Error} Throws an error if the size1 or size2 values are invalid.
+     * @throws {Error} Throws an error if the min or max values are invalid.
      */
-    if (!isValidSize(size1) || !isValidSize(size2)) {
+    if (!isValidSize(min) || !isValidSize(max)) {
       throw new Error("Invalid size value in respPaddingLeft");
     }
     return {
-      paddingLeft: `clamp(${size1}px, 5vw, ${size2}px)`,
+      paddingLeft: `clamp(${min}px, 5vw, ${max}px)`,
     };
   },
-  respPaddingRight: (size1, size2) => {
+  respPaddingRight: (min: number, max: number) => {
     /**
      * Function that returns responsive CSS styles for setting the right padding.
-     * @param {number} size1 - The minimum size of the right padding in pixels.
-     * @param {number} size2 - The maximum size of the right padding in pixels.
+     * @param {number} min - The minimum size of the right padding in pixels.
+     * @param {number} max - The maximum size of the right padding in pixels.
      * @returns {Object} CSS styles for the responsive right padding.
-     * @throws {Error} Throws an error if the size1 or size2 values are invalid.
+     * @throws {Error} Throws an error if the min or max values are invalid.
      */
-    if (!isValidSize(size1) || !isValidSize(size2)) {
+    if (!isValidSize(min) || !isValidSize(max)) {
       throw new Error("Invalid size value in respPaddingRight");
     }
     return {
-      paddingRight: `clamp(${size1}px, 5vw, ${size2}px)`,
+      paddingRight: `clamp(${min}px, 5vw, ${max}px)`,
     };
   },
-  respPaddingBottom: (size1, size2) => {
+  respPaddingBottom: (min: number, max: number) => {
     /**
      * Function that returns responsive CSS styles for setting the bottom padding.
-     * @param {number} size1 - The minimum size of the bottom padding in pixels.
-     * @param {number} size2 - The maximum size of the bottom padding in pixels.
+     * @param {number} min - The minimum size of the bottom padding in pixels.
+     * @param {number} max - The maximum size of the bottom padding in pixels.
      * @returns {Object} CSS styles for the responsive bottom padding.
-     * @throws {Error} Throws an error if the size1 or size2 values are invalid.
+     * @throws {Error} Throws an error if the min or max values are invalid.
      */
-    if (!isValidSize(size1) || !isValidSize(size2)) {
+    if (!isValidSize(min) || !isValidSize(max)) {
       throw new Error("Invalid size value in respPaddingBottom");
     }
     return {
-      paddingBottom: `clamp(${size1}px, 5vw, ${size2}px)`,
+      paddingBottom: `clamp(${min}px, 5vw, ${max}px)`,
     };
   },
   // Style: marginNone
@@ -456,7 +552,7 @@ const styles = {
   },
 
   // Style: zIndex
-  zIndex: (value) => {
+  zIndex: (value: number) => {
     /**
      * Function that returns CSS styles for setting the z-index.
      * @param {number} value - The z-index value.
@@ -472,7 +568,7 @@ const styles = {
   },
 
   // Style: textDeco
-  textDeco: (value) => {
+  textDeco: (value: string) => {
     /**
      * Function that returns CSS styles for setting the text decoration.
      * @param {string} value - The text decoration value.
@@ -488,7 +584,7 @@ const styles = {
   },
 
   // Style: textTrans
-  textTrans: (value) => {
+  textTrans: (value: string) => {
     /**
      * Function that returns CSS styles for setting the text transform.
      * @param {string} value - The text transform value.
@@ -600,7 +696,7 @@ const styles = {
   },
 
   // Style: flexJContent
-  flexJContent: (type) => {
+  flexJContent: (type: string) => {
     /**
      * Function that returns CSS styles for setting the justify-content property in a flex container.
      * @param {string} type - The justify-content value.
@@ -616,7 +712,7 @@ const styles = {
   },
 
   // Style: flexAContent
-  flexAContent: (type) => {
+  flexAContent: (type: string) => {
     /**
      * Function that returns CSS styles for setting the align-items property in a flex container.
      * @param {string} type - The align-items value.
@@ -632,7 +728,7 @@ const styles = {
   },
 
   // Style: RespFontSize
-  RespFontSize: (min, max) => ({
+  RespFontSize: (min: number, max: number) => ({
     /**
      * Function that returns CSS styles for setting the font size with clamped responsiveness.
      * @param {number} min - The minimum font size in pixels.
@@ -643,7 +739,7 @@ const styles = {
   }),
 
   // Style: RespLineHeight
-  RespLineHeight: (min, max) => ({
+  RespLineHeight: (min: number, max: number) => ({
     /**
      * Function that returns CSS styles for setting the line height with clamped responsiveness.
      * @param {number} min - The minimum line height in pixels.
@@ -654,7 +750,7 @@ const styles = {
   }),
 
   // Style: respFontWeight
-  respFontWeight: (min, max) => ({
+  respFontWeight: (min: number, max: number) => ({
     /**
      * Function that returns CSS styles for setting the font weight with clamped responsiveness.
      * @param {number} min - The minimum font weight.
@@ -803,29 +899,22 @@ const styles = {
      */
     position: "static",
   },
-  // Style: positionFixed
-  positionFixed: {
-    /**
-     * Object that represents the CSS styles for setting the position to fixed.
-     */
-    position: "fixed",
-  },
   // Style: transition
-  transition: (property, duration, timingFunction) => {
+  transition: (property: string, duration: number, timingFunction: number) => {
     /**
      * Function that returns CSS styles for adding a transition effect.
      * @param {string} property - The CSS property to transition.
-     * @param {string} duration - The duration of the transition.
-     * @param {string} timingFunction - The timing function of the transition.
+     * @param {number} duration - The duration of the transition.
+     * @param {number} timingFunction - The timing function of the transition.
      * @returns {Object} CSS styles for the transition effect.
      */
     return {
-      transition: `${property} ${duration} ${timingFunction}`,
+      transition: `${property} ${duration}s ${timingFunction}s`,
     };
   },
 
   // Style: rotate
-  rotate: (degree) => {
+  rotate: (degree: number) => {
     /**
      * Function that returns CSS styles for rotating an element.
      * @param {number} degree - The degree of rotation.
@@ -837,7 +926,7 @@ const styles = {
   },
 
   // Style: scale
-  scale: (factor) => {
+  scale: (factor: number) => {
     /**
      * Function that returns CSS styles for scaling an element.
      * @param {number} factor - The scaling factor.
@@ -890,15 +979,15 @@ const styles = {
   },
 
   // Style: transitionAll
-  transitionAll: (duration, timingFunction) => {
+  transitionAll: (duration: number, timingFunction: number) => {
     /**
      * Function that returns CSS styles for adding a transition effect to all properties.
-     * @param {string} duration - The duration of the transition.
-     * @param {string} timingFunction - The timing function of the transition.
+     * @param {number} duration - The duration of the transition.
+     * @param {number} timingFunction - The timing function of the transition.
      * @returns {Object} CSS styles for the transition effect on all properties.
      */
     return {
-      transition: `all ${duration} ${timingFunction}`,
+      transition: `all ${duration}s ${timingFunction}s`,
     };
   },
 
@@ -943,7 +1032,7 @@ const styles = {
   },
 
   // Style: gradientBg
-  gradientBg: (startColor, endColor) => {
+  gradientBg: (startColor: string, endColor: string) => {
     /**
      * Function that returns CSS styles for creating a gradient background.
      * @param {string} startColor - The starting color of the gradient.
@@ -956,7 +1045,7 @@ const styles = {
   },
 
   // Style: bgImage
-  bgImage: (url, size, position, repeat) => {
+  bgImage: (url: string, size: string, position: string, repeat : string) => {
     /**
      * Function that returns CSS styles for setting a background image.
      * @param {string} url - The URL of the image.
@@ -1004,7 +1093,7 @@ const styles = {
   },
 
   // Style: flexGrow
-  flexGrow: (value) => {
+  flexGrow: (value: number) => {
     /**
      * Function that returns CSS styles for setting the flex grow factor.
      * @param {number} value - The flex grow factor.
@@ -1016,7 +1105,7 @@ const styles = {
   },
 
   // Style: flexShrink
-  flexShrink: (value) => {
+  flexShrink: (value: number) => {
     /**
      * Function that returns CSS styles for setting the flex shrink factor.
      * @param {number} value - The flex shrink factor.
@@ -1028,17 +1117,66 @@ const styles = {
   },
 
   // Style: flexBasis
-  flexBasis: (value) => {
+  flexBasisEm: (value : number)=>{
     /**
      * Function that returns CSS styles for setting the flex basis.
-     * @param {string} value - The flex basis value.
+     * @param {number} value - The flex basis.
      * @returns {Object} CSS styles for the flex basis.
      */
     return {
-      flexBasis: value,
+      flexBasis: `${value}em`,
     };
   },
-
+  flexBasisPerc: (value : number)=>{
+    /**
+     * Function that returns CSS styles for setting the flex basis.
+     * @param {number} value - The flex basis.
+     * @returns {Object} CSS styles for the flex basis.
+     */
+    return {
+      flexBasis: `${value}%`,
+    };
+  },
+  flexBasisPx: (value : number)=>{
+    /**
+     * Function that returns CSS styles for setting the flex basis.
+     * @param {number} value - The flex basis.
+     * @returns {Object} CSS styles for the flex basis.
+     */
+    return {
+      flexBasis: `${value}px`,
+    };
+  },
+  flexBasisAuto: {
+    /**
+     * Object containing CSS properties for the flex basis automatically
+     */
+      flexBasis: "auto",
+  },
+  flexBasisMaxC: {
+    /**
+     * Object containing CSS properties for the flex basis maximum content
+     */
+    flexBasis: "max-content",
+  },
+  flexBasisMinC: {
+    /**
+     * Object containing CSS properties for the flex basis minimum content
+     */
+    flexBasis: "min-content",
+  },
+  flexBasisFitC: {
+    /**
+     * Object containing CSS properties for the flex basis fit content
+     */
+    flexBasis: "fit-content",
+  },
+  flexBasisC: {
+    /**
+     * Object containing CSS properties for the flex basis content
+     */
+    flexBasis: "content",
+  },
   // Style: flexCenter
   flexCenter: {
     /**
@@ -1050,26 +1188,26 @@ const styles = {
   },
 
   // Style: letterSpacing
-  letterSpacing: (value) => {
+  letterSpacing: (value: number) => {
     /**
      * Function that returns CSS styles for setting the letter spacing.
-     * @param {string} value - The letter spacing value.
+     * @param {number} value - The letter spacing value.
      * @returns {Object} CSS styles for the letter spacing.
      */
     return {
-      letterSpacing: value,
+      letterSpacing: `${value}px`,
     };
   },
 
   // Style: wordSpacing
-  wordSpacing: (value) => {
+  wordSpacing: (value: number) => {
     /**
      * Function that returns CSS styles for setting the word spacing.
-     * @param {string} value - The word spacing value.
+     * @param {number} value - The word spacing value.
      * @returns {Object} CSS styles for the word spacing.
      */
     return {
-      wordSpacing: value,
+      wordSpacing: `${value}px`,
     };
   },
 
@@ -1116,7 +1254,7 @@ const styles = {
   },
 
   // Style: opacity
-  opacity: (value) => {
+  opacity: (value: number) => {
     /**
      * Function that returns CSS styles for setting the opacity.
      * @param {number} value - The opacity value.
@@ -1128,10 +1266,10 @@ const styles = {
   },
 
   // Style: filterBlur
-  filterBlur: (value) => {
+  filterBlur: (value: number) => {
     /**
      * Function that returns CSS styles for applying a blur filter.
-     * @param {string} value - The blur value.
+     * @param {number} value - The blur value.
      * @returns {Object} CSS styles for the blur filter.
      */
     return {
@@ -1140,7 +1278,7 @@ const styles = {
   },
 
   // Style: filterBrightness
-  filterBrightness: (value) => {
+  filterBrightness: (value: number) => {
     /**
      * Function that returns CSS styles for adjusting the brightness.
      * @param {number} value - The brightness value.
@@ -1152,7 +1290,7 @@ const styles = {
   },
 
   // Style: filterContrast
-  filterContrast: (value) => {
+  filterContrast: (value: number) => {
     /**
      * Function that returns CSS styles for adjusting the contrast.
      * @param {number} value - The contrast value.
@@ -1164,7 +1302,7 @@ const styles = {
   },
 
   // Style: filterGrayscale
-  filterGrayscale: (value) => {
+  filterGrayscale: (value: number) => {
     /**
      * Function that returns CSS styles for applying grayscale.
      * @param {number} value - The grayscale value.
@@ -1176,7 +1314,7 @@ const styles = {
   },
 
   // Style: filterHueRotate
-  filterHueRotate: (value) => {
+  filterHueRotate: (value: number) => {
     /**
      * Function that returns CSS styles for rotating the hue.
      * @param {number} value - The hue rotation value.
@@ -1188,7 +1326,7 @@ const styles = {
   },
 
   // Style: filterInvert
-  filterInvert: (value) => {
+  filterInvert: (value: number) => {
     /**
      * Function that returns CSS styles for inverting colors.
      * @param {number} value - The invert value.
@@ -1200,7 +1338,7 @@ const styles = {
   },
 
   // Style: filterOpacity
-  filterOpacity: (value) => {
+  filterOpacity: (value: number) => {
     /**
      * Function that returns CSS styles for adjusting the opacity.
      * @param {number} value - The opacity value.
@@ -1212,7 +1350,7 @@ const styles = {
   },
 
   // Style: filterSaturate
-  filterSaturate: (value) => {
+  filterSaturate: (value: number) => {
     /**
      * Function that returns CSS styles for saturating colors.
      * @param {number} value - The saturation value.
@@ -1224,7 +1362,7 @@ const styles = {
   },
 
   // Style: filterSepia
-  filterSepia: (value) => {
+  filterSepia: (value: number) => {
     /**
      * Function that returns CSS styles for applying sepia.
      * @param {number} value - The sepia value.
@@ -1242,13 +1380,13 @@ const styles = {
       /**
        * Object that represents the CSS styles for setting the primary background color on hover with white text.
        */
-      style: isHovered
+      stylePrimaryHover: isHovered
         ? {
             backgroundColor: "#0056b3",
             color: "#fff",
           }
         : {},
-      ref: ref,
+      refPrimaryHover: ref,
     };
   },
 
@@ -1260,13 +1398,13 @@ const styles = {
       /**
        * Object that represents the CSS styles for setting the success background color on hover with white text.
        */
-      style: isHovered
+      styleSuccessHover: isHovered
         ? {
             backgroundColor: "#218838",
             color: "#fff",
           }
         : {},
-      ref: ref,
+      refSuccessHover: ref,
     };
   },
   // Style: bgDangerHover
@@ -1277,13 +1415,13 @@ const styles = {
       /**
        * Object that represents the CSS styles for setting the danger background color on hover with white text.
        */
-      style: isHovered
+      styleDangerHover: isHovered
         ? {
             backgroundColor: "#d32f2f",
             color: "#fff",
           }
         : {},
-      ref: ref,
+      refDangerHover: ref,
     };
   },
   // Style: bgWarningHover
@@ -1294,13 +1432,13 @@ const styles = {
       /**
        * Object that represents the CSS styles for setting the warning background color on hover with white text.
        */
-      style: isHovered
+      styleWarningHover: isHovered
         ? {
             backgroundColor: "#f0ad4e",
             color: "#fff",
           }
         : {},
-      ref: ref,
+      refWarningHover: ref,
     };
   },
   // Style: bgInfoHover
@@ -1311,13 +1449,13 @@ const styles = {
       /**
        * Object that represents the CSS styles for setting the info background color on hover with white text.
        */
-      style: isHovered
+      styleInfoHover: isHovered
         ? {
             backgroundColor: "#17a2b8",
             color: "#fff",
           }
         : {},
-      ref: ref,
+      refInfoHover: ref,
     };
   },
   // Style: bgSecondaryHover
@@ -1328,13 +1466,13 @@ const styles = {
       /**
        * Object that represents the CSS styles for setting the secondary background color on hover with white text.
        */
-      style: isHovered
+      styleSecondaryHover: isHovered
         ? {
             backgroundColor: "#6c757d",
             color: "#fff",
           }
         : {},
-      ref: ref,
+      refSecondaryHover: ref,
     };
   },
   // Style: bgLightHover
@@ -1345,13 +1483,13 @@ const styles = {
       /**
        * Object that represents the CSS styles for setting the light background color on hover with white text.
        */
-      style: isHovered
+      styleLightHover: isHovered
         ? {
             backgroundColor: "#f8f9fa",
             color: "#fff",
           }
         : {},
-      ref: ref,
+      refLightHover: ref,
     };
   },
   // Style: bgDarkHover
@@ -1362,13 +1500,13 @@ const styles = {
       /**
        * Object that represents the CSS styles for setting the dark background color on hover with white text.
        */
-      style: isHovered
+      styleDarkHover: isHovered
         ? {
             backgroundColor: "#343a40",
             color: "#fff",
           }
         : {},
-      ref: ref,
+      refDarkHover: ref,
     };
   },
   // Style: bgWhiteHover
@@ -1379,13 +1517,13 @@ const styles = {
       /**
        * Object that represents the CSS styles for setting the white background color on hover with white text.
        */
-      style: isHovered
+      styleWhiteHover: isHovered
         ? {
             backgroundColor: "#fff",
             color: "#000",
           }
         : {},
-      ref: ref,
+      refWhiteHover: ref,
     };
   },
   // Style: bgTransparentHover
@@ -1396,41 +1534,336 @@ const styles = {
       /**
        * Object that represents the CSS styles for setting the transparent background color on hover with white text.
        */
-      style: isHovered
+      styleTransparentHover: isHovered
         ? {
             backgroundColor: "transparent",
             color: "#000",
           }
         : {},
-      ref: ref,
+      refTransparentHover: ref,
     };
   },
   // Style: bgPrimaryActive
   bgPrimaryActive: () => {
-    const { ref, isActive } = useHover();
+    const { ref, isActive } = useActive();
 
     return {
       /**
        * Object that represents the CSS styles for setting the primary background color on active with white text.
        */
-      style: isActive
+      stylePrimaryActive: isActive
         ? {
             backgroundColor: "#0056b3",
             color: "#fff",
           }
         : {},
-      ref: ref,
+      refPrimaryActive: ref,
     };
   },
+  // Style: bgSuccessActive
+  bgSuccessActive: () => {
+    const { ref, isActive } = useActive();
+
+    return {
+      /**
+       * Object that represents the CSS styles for setting the success background color on active with white text.
+       */
+      styleSuccessActive: isActive
+        ? {
+            backgroundColor: "#218838",
+            color: "#fff",
+          }
+        : {},
+      refSuccessActive: ref,
+    };
+  },
+  // Style: bgDangerActive
+  bgDangerActive: () => {
+    const { ref, isActive } = useActive();
+
+    return {
+      /**
+       * Object that represents the CSS styles for setting the danger background color on active with white text.
+       */
+      styleDangerActive: isActive
+        ? {
+            backgroundColor: "#d32f2f",
+            color: "#fff",
+          }
+        : {},
+      refDangerActive: ref,
+    };
+  },
+  // Style: bgWarningActive
+  bgWarningActive: () => {
+    const { ref, isActive } = useActive();
+
+    return {
+      /**
+       * Object that represents the CSS styles for setting the warning background color on active with white text.
+       */
+      styleWarningActive: isActive
+        ? {
+            backgroundColor: "#f0ad4e",
+            color: "#fff",
+          }
+        : {},
+      refWarningActive: ref,
+    };
+  },
+  // Style: bgInfoActive
+  bgInfoActive: () => {
+    const { ref, isActive } = useActive();
+
+    return {
+      /**
+       * Object that represents the CSS styles for setting the info background color on active with white text.
+       */
+      styleInfoActive: isActive
+        ? {
+            backgroundColor: "#17a2b8",
+            color: "#fff",
+          }
+        : {},
+      refInfoActive: ref,
+    };
+  },
+
+  // Style: bgSecondaryActive
+  bgSecondaryActive: () => {
+    const { ref, isActive } = useActive();
+
+    return {
+      /**
+       * Object that represents the CSS styles for setting the secondary background color on active with white text.
+       */
+      styleSecondaryActive: isActive
+        ? {
+            backgroundColor: "#6c757d",
+            color: "#fff",
+          }
+        : {},
+      refSecondaryActive: ref,
+    };
+  },
+  // Style: bgLightActive
+
+  bgLightActive: () => {
+    const { ref, isActive } = useActive();
+
+    return {
+      /**
+       * Object that represents the CSS styles for setting the light background color on active with white text.
+       */
+      styleLightActive: isActive
+        ? {
+            backgroundColor: "#f8f9fa",
+            color: "#fff",
+          }
+        : {},
+      refLightActive: ref,
+    };
+  },
+
+  // Style: bgDarkActive
+  bgDarkActive: () => {
+    const { ref, isActive } = useActive();
+
+    return {
+      /**
+       * Object that represents the CSS styles for setting the dark background color on active with white text.
+       */
+      styleDarkActive: isActive
+        ? {
+            backgroundColor: "#343a40",
+            color: "#fff",
+          }
+        : {},
+      refDarkActive: ref,
+    };
+  },
+  // Style: persWidth
+  persWidth: (value: number) => {
+    /**
+     * Function that returns CSS styles for setting width as a percentage.
+     * @param {number} value - The percentage width value.
+     * @returns {Object} CSS styles for setting width as a percentage.
+     */
+    return {
+      width: `${value}%`,
+    };
+  },
+  // style: persWH
+  persWH: (value: number) => {
+    /**
+     * Function that returns CSS styles for setting width and height as a percentage.
+     * @param {number} value - The percentage width and height value.
+     * @returns {Object} CSS styles for setting width and height as a percentage.
+     */
+    return {
+      width: `${value}%`,
+      height: `${value}%`,
+    };
+  },
+  // Style: persHeight
+  persHeight: (value: number) => {
+    /**
+     * Function that returns CSS styles for setting height as a percentage.
+     * @param {number} value - The percentage height value.
+     * @returns {Object} CSS styles for setting height as a percentage.
+     */
+    return {
+      height: `${value}%`,
+    };
+  },
+  // style: pxWidth
+  pxWidth: (value: number) => {
+    /**
+     * Function that returns CSS styles for setting width in pixels.
+     * @param {number} value - The width value in pixels.
+     * @returns {Object} CSS styles for setting width in pixels.
+     */
+    return {
+      width: `${value}px`,
+    };
+  },
+  // style: pxHeight
+  pxHeight: (value: number) => {
+    /**
+     * Function that returns CSS styles for setting height in pixels.
+     * @param {number} value - The height value in pixels.
+     * @returns {Object} CSS styles for setting height in pixels.
+     */
+    return {
+      height: `${value}px`,
+    };
+  },
+  // style: pxWH
+  pxWH: (value: number) => {
+    /**
+     * Function that returns CSS styles for setting width and height in pixels.
+     * @param {number} value - The width and height values in pixels.
+     * @returns {Object} CSS styles for setting width and height in pixels.
+     */
+    return {
+      width: `${value}px`,
+      height: `${value}px`,
+    };
+  },
+  // style: dvhHeight
+  dvhHeight: (value: number) => {
+    /**
+     * Function that returns CSS styles for setting height in dynamic viewport height units (dvh).
+     * @param {number} value - The height value in dynamic viewport height units.
+     * @returns {Object} CSS styles for setting height in dynamic viewport height units.
+     */
+    return {
+      height: `${value}dvh`,
+    };
+  },
+  // style: dvhWidth
+  dvwWidth: (value: number) => {
+    /**
+     * Function that returns CSS styles for setting width in dynamic viewport width units (dvw).
+     * @param {number} value - The width value in dynamic viewport width units.
+     * @returns {Object} CSS styles for setting width in dynamic viewport width units.
+     */
+    return {
+      width: `${value}dvw`,
+    };
+  },
+  // style: dvWH
+  dvWH: (value: number) => {
+    /**
+     * Function that returns CSS styles for setting width and height in dynamic viewport units (dvw and dvh).
+     * @param {number} value - The width and height values in dynamic viewport units.
+     * @returns {Object} CSS styles for setting width and height in dynamic viewport units.
+     */
+    return {
+      width: `${value}dvw`,
+      height: `${value}dvh`,
+    };
+  },
+  // style: fitContentW
+  fitContentW: {
+    /**
+     * Object that represents the CSS styles for setting the width to fit content.
+     */
+    width: "fit-content",
+  },
+  // style: fitContentH
+  fitContentH: {
+    /**
+     * Object that represents the CSS styles for setting the height to fit content.
+     */
+    height: "fit-content",
+  },
+  // style: fit
+  fitContentHW: {
+    /**
+     * Object that represents the CSS styles for setting both width and height to fit content.
+     */
+    width: "fit-content",
+    height: "fit-content",
+  },
 };
+
+/**
+ * Utility function for handling styles based on hover state.
+ *
+ * @param {Object} style - The base style object to be applied.
+ * @returns {Object} An object containing the reference and hover-based style.
+ */
+
+const styleHover = (...style: object[]) => {
+  const { ref, isHovered } = useHover();
+    // If the base style is empty, return an empty style object.
+  if (Object.keys(style).length === 0) {    
+    return {
+      refOfHover: ref,
+      styleOfHover: {},
+    }
+  }
+    // Return the reference and style object based on the hover state.
+
+  return {
+    refOfHover: ref,
+    styleOfHover: isHovered ? mergeStyles(...style) : {},
+  }
+}
+
+
+/**
+ * Utility function for handling styles based on the active state.
+ *
+ * @param {Array of Object} style - The base style object to be applied.
+ * @returns {Object} An object containing the reference and active state-based style.
+ */
+
+const styleActive = (...style: object[]) => {
+  const { ref, isActive } = useActive();
+  // If the base style is empty, return an empty style object.
+  if (Object.keys(style).length === 0) {    
+    return {
+      refOfActive: ref,
+      styleOfActive: {},
+    }
+  }
+  // Return the reference and style object based on the active state.
+  return {
+    refOfActive: ref,
+    styleOfActive: isActive ? mergeStyles(...style) : {},
+  }
+}
 
 /**
  * Function that returns a new object that is the combination of two or more existing objects.
  * @param  {...Object} objects - The objects to merge.
  * @returns {Object} The merged object.
  */
-const merge = (...args) => {
+
+const mergeStyles = (...args: object[]) => {
   return Object.assign({}, ...args);
 };
 
-export { styles, merge };
+export { styles, mergeStyles , styleHover , styleActive };
