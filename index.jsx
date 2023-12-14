@@ -1,6 +1,6 @@
 // Import statements
 import "fhf/dist/css/FHF.min.css";
-import React, { MutableRefObject } from "react";
+import React from "react";
 import { useEffect, useState, useRef, useCallback } from "react";
 
 // ClearFix component
@@ -8,7 +8,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
  * A component that adds a class of "clearFix" to a div element, which is used to clear floated elements.
  * @returns {JSX.Element} A div element with the class "clearFix".
  */
-function ClearFix(): JSX.Element {
+function ClearFix() {
   return <div className="clearFix"></div>;
 }
 
@@ -21,7 +21,7 @@ function ClearFix(): JSX.Element {
  * @param {string} props.className - The additional CSS class to be applied to the container.
  * @returns {JSX.Element} A div element with the class "container" and the specified child elements and styles.
  */
-function Container({ children, style = {}, className = "", ...otherProps }: { children: React.ReactNode; style: object; className: string; }): JSX.Element {
+function Container({ children, style = {}, className = "", ...otherProps }) {
   return (
     <div style={style} className={`container ${className}`} {...otherProps}>
       {children}
@@ -43,7 +43,7 @@ function FlexContainer({
   style = {},
   className = "",
   ...otherProps
-}: { children: React.ReactNode; style: object; className: string; }): JSX.Element {
+}) {
   return (
     <div
       className={`flex-container ${className}`}
@@ -64,7 +64,7 @@ function FlexContainer({
  * @param {string} props.className - The additional CSS class to be applied to the flex item.
  * @returns {JSX.Element} A div element with the class "flex-item" and the specified child elements and styles.
  */
-function FlexItem({ children, style = {}, className = "", ...otherProps }: { children: React.ReactNode; style: object; className: string; }): JSX.Element {
+function FlexItem({ children, style = {}, className = "", ...otherProps }) {
   return (
     <div className={`flex-item ${className}`} style={style} {...otherProps}>
       {children}
@@ -90,7 +90,7 @@ function DivV({
   visibleIn = "",
   hiddenIn = "",
   ...otherProps
-}: { children: React.ReactNode; className: string; style: object; visibleIn: string; hiddenIn: string; }): JSX.Element {
+}) {
   if (visibleIn === "" && hiddenIn === "") {
     console.warn(
       "visibleIn and hiddenIn cannot be empty at the same time (use div instead of DivV)",
@@ -110,7 +110,7 @@ function DivV({
     lg: "hiddenLg",
   };
 
-  const getVisibilityClass = (visibility: any, classes: any) =>
+  const getVisibilityClass = (visibility, classes) =>
     (visibility && classes[visibility]) || "";
 
   const combinedClasses = `${getVisibilityClass(
@@ -135,7 +135,7 @@ function DivV({
  * @param {string} props.className - The additional CSS class to be applied to the image.
  * @returns {JSX.Element} An img element with the specified properties and styles.
  */
-function RespImg({ src, alt, style = {}, className = "", ...otherProps }: { src: string; alt: string; style: object; className: string; }): JSX.Element {
+function RespImg({ src, alt, style = {}, className = "", ...otherProps }) {
   if (src === undefined || src === "") {
     throw new Error("src cannot be undefined or empty");
   }
@@ -172,10 +172,11 @@ function RespImg({ src, alt, style = {}, className = "", ...otherProps }: { src:
  */
 function RespVideo({
   src = "",
+  alt,
   style = {},
   className = "",
   ...otherProps
-}: { src: string; style: object; className: string; }): JSX.Element {
+}) {
   if (src === undefined || src === "") {
     throw new Error("src cannot be undefined or empty");
   }
@@ -191,6 +192,7 @@ function RespVideo({
   return (
     <video
       src={src}
+      alt={alt}
       style={combinedStyles}
       className={className}
       {...otherProps}
@@ -216,7 +218,7 @@ function RespGridFill({
   gap = 0,
   className = "",
   ...otherProps
-}: { children: React.ReactNode; size: number; style: object; gap: number; className: string; }): JSX.Element {
+}) {
   if (size === null || size === undefined || size === 0) {
     throw new Error("size cannot be null or undefined or 0");
   }
@@ -232,7 +234,7 @@ function RespGridFill({
     gap: `${gap}px`,
   };
 
-  if (gap === 0) {
+  if (gap === "") {
     return (
       <div style={withOutGap} className={`${className}`} {...otherProps}>
         {children}
@@ -265,7 +267,7 @@ function RespGridFit({
   gap = 0,
   className = "",
   ...otherProps
-}: { children: React.ReactNode; size: number; style: object; gap: number; className: string; }): JSX.Element {
+}) {
   if (size === null || size === undefined || size === 0) {
     throw new Error("size cannot be null or undefined or 0");
   }
@@ -281,7 +283,7 @@ function RespGridFit({
     gap: `${gap}px`,
   };
 
-  if (gap === 0) {
+  if (gap === "") {
     return (
       <div style={withOutGap} className={`${className}`} {...otherProps}>
         {children}
@@ -305,7 +307,7 @@ function RespGridFit({
  * @param {Object} props.style - The CSS styles to be applied to the list.
  * @returns {JSX.Element} An unordered list element with the specified child elements and styles.
  */
-function UnstyledList({ children, className = "", style = {}, ...otherProps }: { children: React.ReactNode; className: string; style: object; }): JSX.Element {
+function UnstyledList({ children, className = "", style = {}, ...otherProps }) {
   const listStyle = {
     listStyleType: "none",
     padding: 0,
@@ -332,7 +334,7 @@ function UnstyledList({ children, className = "", style = {}, ...otherProps }: {
  * @param {Object} props.otherProps - Any other additional properties that should be applied to the unordered list element.
  * @returns {JSX.Element} An unordered list element with the specified child elements and styles.
  */
-function NavUl({ children, style = {}, className = "", ...otherProps }: { children: React.ReactNode; style: object; className: string; otherProps: object; }): JSX.Element {
+function NavUl({ children, style = {}, className = "", ...otherProps }) {
   const listStyle = {
     listStyleType: "none",
     padding: 0,
@@ -370,7 +372,7 @@ function RespHeading({
   className = "",
   children,
   ...otherProps
-}: { element: string; style: object; className: string; children: React.ReactNode; otherProps: object; }): JSX.Element {
+}) {
   if (
     element !== "h1" &&
     element !== "h2" &&
@@ -431,7 +433,7 @@ function RespHeading({
  * @param {Object} props.otherProps - Any other additional properties that should be applied to the circular container element.
  * @returns {JSX.Element} A div element with circular styling and the specified child elements and styles.
  */
-function Circle({ children, style = {}, className = "", ...otherProps }: { children: React.ReactNode; style: object; className: string; otherProps: object; }): JSX.Element {
+function Circle({ children, style = {}, className = "", ...otherProps }) {
   const circleStyle = {
     borderRadius: "50%",
   };
@@ -446,7 +448,7 @@ function Circle({ children, style = {}, className = "", ...otherProps }: { child
   );
 }
 
-// Component: RespBackgImg
+// Component: ResBackgImg
 /**
  * A responsive background image component that adjusts its background size and position.
  * @param {Object} props - The component's properties.
@@ -460,14 +462,14 @@ function Circle({ children, style = {}, className = "", ...otherProps }: { child
  * @throws {Error} Throws an error if the provided element is not one of: "div", "section", "header", "footer".
  * @throws {Error} Throws an error if the URL for the background image is empty.
  */
-function RespBackgImg({
+function ResBackgImg({
   element = "div",
   url = "",
   children,
   style = {},
   className = "",
   ...otherProps
-}: { element: string; url: string; children: React.ReactNode; style: object; className: string; otherProps: object; }): JSX.Element {
+}) {
   if (url === "") {
     throw new Error(" url cannot be empty in ResBackgImg");
   }
@@ -510,12 +512,12 @@ function RespBackgImg({
  * @param {string} query - A media query string.
  * @returns {boolean} Whether the current device matches the given media query.
  */
-function useMediaQuery(query: string): boolean {
+function useMediaQuery(query) {
   // Initialize the state variable 'matches' with the initial match status of the media query.
   const [matches, setMatches] = useState(window.matchMedia(query).matches);
 
   // Define a memoized function to handle changes in the media query status.
-  const handleChange = useCallback((event: any) => {
+  const handleChange = useCallback((event) => {
     // Update the 'matches' state based on the new match status.
     setMatches(event.matches);
   }, []);
@@ -545,7 +547,7 @@ function useMediaQuery(query: string): boolean {
  * @param {Object} style - The style object to be applied when the media query matches.
  * @returns {Object} The style object that should be applied to the component.
  */
-const useMediaStyle = (query: string, style: object): object => {
+const useMediaStyle = (query, style) => {
   // Use the useMediaQuery hook to check if the media query matches.
   const matches = useMediaQuery(query);
   // Return the style object if the media query matches, otherwise an empty object.
@@ -555,14 +557,14 @@ const useMediaStyle = (query: string, style: object): object => {
 /**
  * React Hook for getting the current hover state.
  *
- * @returns {{ ref: React.RefObject<HTMLElement>, isHovered: boolean }} An object containing a reference to the DOM element and the current hover state.
+ * @returns {{ref: React.RefObject, isHovered: boolean}} An object containing a reference to the DOM element and the current hover state.
  */
-function useHover(): { ref: React.RefObject<HTMLElement>; isHovered: boolean } {
+function useHover() {
   // Initialize the state variable 'isHovered' with the initial hover state.
   const [isHovered, setIsHovered] = useState(false);
 
   // Create a ref to store the reference to the DOM element.
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef(null);
 
   // Define memoized functions to handle mouse enter and mouse leave events.
   const handleMouseEnter = useCallback(() => {
@@ -596,14 +598,14 @@ function useHover(): { ref: React.RefObject<HTMLElement>; isHovered: boolean } {
 /**
  * React Hook for handling active state based on mouse events.
  *
- * @returns {{ ref: MutableRefObject<HTMLElement | null>; isActive: boolean }} An object containing a mutable reference to the DOM element and the active state.
+ * @returns {{ ref: React.MutableRefObject, isActive: boolean }} An object containing a mutable reference to the DOM element and the active state.
  */
-function useActive(): { ref: MutableRefObject<HTMLElement | null>; isActive: boolean } {
+function useActive() {
   // Initialize the state variable 'isActive' with the initial active state.
   const [isActive, setIsActive] = useState(false);
 
   // Create a ref to store the reference to the DOM element.
-  const ref = useRef<HTMLElement | null>(null);
+  const ref = useRef(null);
 
   // Define memoized functions to handle mouse down and mouse up events.
   const handleMouseDown = useCallback(() => {
@@ -634,59 +636,41 @@ function useActive(): { ref: MutableRefObject<HTMLElement | null>; isActive: boo
   return { ref, isActive };
 }
 
-// Define a custom type that extends MutableRefObject and includes additional properties.
-type MergedRef = MutableRefObject<{
-  current: HTMLElement | null;
-  mergeFunction: (val: HTMLElement | null) => void;
-}>;
-
 /**
  * React Hook for merging multiple React refs into a single ref object.
  *
- * @param {...React.RefObject<HTMLElement | null>} refs - An array of React ref objects.
- * @returns {React.RefObject<HTMLElement | null>} A single ref object that represents the merged refs.
+ * @param  {...React.RefObject} refs - An array of React ref objects.
+ * @returns {React.RefObject} A single ref object that represents the merged refs.
  */
-function mergeRefs(...refs: (React.RefObject<HTMLElement | null> | ((instance: HTMLElement | null) => void))[]): React.MutableRefObject<HTMLElement | null> {
-  const mergedRef: MergedRef = useRef({
-    current: null,
-    mergeFunction: () => {},
-  });
-
-  const mergeFunction = (val: HTMLElement | null) => {
+function mergeRefs(...refs) {
+  // Define a memoized function to set the value of each ref in the array based on the order of the refs.
+  const mergeFunction = (val) => {
     setRef(val, ...refs);
   };
 
-  mergedRef.current.mergeFunction = mergeFunction;
-
-  const mergedRefObject: React.MutableRefObject<HTMLElement | null> = {
-    get current() {
-      return mergedRef.current.current;
-    },
-    set current(val) {
-      mergedRef.current.current = val;
-      mergedRef.current.mergeFunction(val);
-    },
-  };
-
-  return mergedRefObject;
+  // Return the memoized merge function.
+  return mergeFunction;
 }
 
 /**
  * A helper function that sets the value of each ref in the array based on the order of the refs in the array.
  *
- * @param {HTMLElement | null} val - The value to be set for each ref.
- * @param {...React.RefObject<HTMLElement | null>} refs - An array of React ref objects.
+ * @param {*} val - The value to be set for each ref.
+ * @param {...React.RefObject} refs - An array of React ref objects.
  */
-function setRef(val: HTMLElement | null, ...refs: (React.RefObject<HTMLElement | null> | ((instance: HTMLElement | null) => void))[]) {
-  refs.forEach((ref) => {
-    if (typeof ref === "function") {
-      ref(val);
-    } else if (ref && 'current' in ref && ref.current !== undefined) {
-      (ref as MutableRefObject<HTMLElement | null>).current = val;
+function setRef(val, ...refs) {
+  // Loop through each ref in the array.
+  for (let i = 0; i < refs.length; i++) {
+    // If the ref is a function, call the ref with the value.
+    if (typeof refs[i] === "function") {
+      refs[i](val);
     }
-  });
+    // Otherwise, set the ref.current property to the value.
+    else if (refs[i] != null) {
+      refs[i].current = val;
+    }
+  }
 }
-
 
 export {
   ClearFix,
@@ -702,7 +686,7 @@ export {
   NavUl,
   RespHeading,
   Circle,
-  RespBackgImg,
+  ResBackgImg,
   useActive,
   useHover,
   useMediaQuery,

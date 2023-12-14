@@ -1,9 +1,9 @@
 /**
  * Checks if a given color string is a valid color.
- * @param color - The color string to be checked.
- * @returns Returns true if the color is valid, false otherwise.
+ * @param {string} color - The color string to be checked.
+ * @returns {boolean} - Returns true if the color is valid, false otherwise.
  */
-const isValidColor = (color: string): boolean => {
+const isValidColor = (color) => {
   // Regular expression to check for a valid color in various formats
   if (color === "" || color === undefined) {
     return false;
@@ -15,23 +15,23 @@ const isValidColor = (color: string): boolean => {
 
 /**
  * Checks if a given size is a valid size.
- * @param size - The size to be checked.
- * @returns Returns true if the size is valid, false otherwise.
+ * @param {number} size - The size to be checked.
+ * @returns {boolean} - Returns true if the size is valid, false otherwise.
  */
-const isValidSize = (size: number): boolean => {
+const isValidSize = (size) => {
   return typeof size === "number" && size >= 0;
 };
 
 /**
  * Checks if a given border style is a valid border style.
- * @param type - The border style to be checked.
- * @returns Returns true if the border style is valid, false otherwise.
+ * @param {string} type - The border style to be checked.
+ * @returns {boolean} - Returns true if the border style is valid, false otherwise.
  */
-const isValidBorderStyle = (type: string): boolean => {
+const isValidBorderStyle = (type) => {
   /**
    * An array containing allowed border styles.
    */
-  const allowedStyles: string[] = [
+  const allowedStyles = [
     "solid",
     "dashed",
     "dotted",
@@ -51,36 +51,35 @@ const isValidBorderStyle = (type: string): boolean => {
 
 /**
  * Checks if a given text decoration style is a valid text decoration style.
- * @param type - The text decoration style to be checked.
- * @returns Returns true if the text decoration style is valid, false otherwise.
+ * @param {string} type - The text decoration style to be checked.
+ * @returns {boolean} - Returns true if the text decoration style is valid, false otherwise.
  */
-const isValidTextDecoration = (type: string): boolean => {
+const isValidTextDecoration = (type) => {
   /**
    * An array containing allowed text decoration styles.
    */
-  const allowedStyles: string[] = ["underline", "overline", "line-through", "none"];
+  const allowedStyles = ["underline", "overline", "line-through", "none"];
 
   /**
    * Returns true if the given text decoration style is included in the allowed styles array, false otherwise.
    */
   return allowedStyles.includes(type);
 };
-
-const isValidTextTransform = (type: string): boolean => {
-  const allowedStyles: string[] = ["capitalize", "uppercase", "lowercase", "none"];
+const isValidTextTransform = (type) => {
+  const allowedStyles = ["capitalize", "uppercase", "lowercase", "none"];
   return allowedStyles.includes(type);
 };
 
 /**
  * Checks if a given justification content is a valid justification content.
- * @param type - The justification content to be checked.
- * @returns Returns true if the justification content is valid, false otherwise.
+ * @param {string} type - The justification content to be checked.
+ * @returns {boolean} - Returns true if the justification content is valid, false otherwise.
  */
-const isValidJContent = (type: string): boolean => {
+const isValidJContent = (type) => {
   /**
    * An array containing allowed justification contents.
    */
-  const allowedStyles: string[] = [
+  const allowedStyles = [
     "flex-start",
     "flex-end",
     "center",
@@ -103,14 +102,14 @@ const isValidJContent = (type: string): boolean => {
 
 /**
  * Checks if a given alignment content is a valid alignment content.
- * @param type - The alignment content to be checked.
- * @returns Returns true if the alignment content is valid, false otherwise.
+ * @param {string} type - The alignment content to be checked.
+ * @returns {boolean} - Returns true if the alignment content is valid, false otherwise.
  */
-const isValidAContent = (type: string): boolean => {
+const isValidAContent = (type) => {
   /**
    * An array containing allowed alignment contents.
    */
-  const allowedStyles: string[] = [
+  const allowedStyles = [
     "flex-start",
     "flex-end",
     "center",
@@ -130,7 +129,6 @@ const isValidAContent = (type: string): boolean => {
    */
   return allowedStyles.includes(type);
 };
-
 export {
   isValidColor,
   isValidSize,
