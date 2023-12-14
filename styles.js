@@ -1806,6 +1806,142 @@ const styles = {
     width: "fit-content",
     height: "fit-content",
   },
+  // style: maxWidthPx
+  maxWidthPx: (value) => {
+    /**
+     * Function that returns CSS styles for setting the maximum width.
+     * @param {number} value - The maximum width value.
+     * @returns {Object} CSS styles for setting the maximum width.
+     */
+    return {
+      maxWidth: `${value}px`,
+    };
+  },
+  // style: maxHeightPx
+  maxHeightPx: (value) => {
+    /**
+     * Function that returns CSS styles for setting the maximum height.
+     * @param {number} value - The maximum height value.
+     * @returns {Object} CSS styles for setting the maximum height.
+     */
+    return {
+      maxHeight: `${value}px`,
+    };
+  },
+  // style: maxWHPx
+  maxWHPx: (value) => {
+    /**
+     * Function that returns CSS styles for setting the maximum width and height.
+     * @param {number} value - The maximum width and height value.
+     * @returns {Object} CSS styles for setting the maximum width and height.
+     */
+    return {
+      maxWidth: `${value}px`,
+      maxHeight: `${value}px`,
+    };
+  },
+  // style: minWidthPx
+  minWidthPx: (value) => {
+    /**
+     * Function that returns CSS styles for setting the minimum width.
+     * @param {number} value - The minimum width value.
+     * @returns {Object} CSS styles for setting the minimum width.
+     */
+    return {
+      minWidth: `${value}px`,
+    };
+  },
+  // style: minHeightPx
+  minHeightPx: (value) => {
+    /**
+     * Function that returns CSS styles for setting the minimum height.
+     * @param {number} value - The minimum height value.
+     * @returns {Object} CSS styles for setting the minimum height.
+     */
+    return {
+      minHeight: `${value}px`,
+    };
+  },
+  // style: minWHPx
+  minWHPx: (value) => {
+    /**
+     * Function that returns CSS styles for setting the minimum width and height.
+     * @param {number} value - The minimum width and height value.
+     * @returns {Object} CSS styles for setting the minimum width and height.
+     */
+    return {
+      minWidth: `${value}px`,
+      minHeight: `${value}px`,
+    };
+  },
+  // style: minWidthPers
+  minHeightPers: (value) => {
+    /**
+     * Function that returns CSS styles for setting the minimum width as a percentage.
+     * @param {number} value - The minimum width as a percentage.
+     * @returns {Object} CSS styles for setting the minimum width as a percentage.
+     */
+    return {
+      minWidth: `${value}%`,
+    };
+  },
+  // style: minHeightPers
+  minWidthPers: (value) => {
+    /**
+     * Function that returns CSS styles for setting the minimum height as a percentage.
+     * @param {number} value - The minimum height as a percentage.
+     * @returns {Object} CSS styles for setting the minimum height as a percentage.
+     */
+    return {
+      minHeight: `${value}%`,
+    };
+  },
+  // style: minWHPers
+  minWHPers: (value) => {
+    /**
+     * Function that returns CSS styles for setting the minimum width and height as a percentage.
+     * @param {number} value - The minimum width and height as a percentage.
+     * @returns {Object} CSS styles for setting the minimum width and height as a percentage.
+     */
+    return {
+      minWidth: `${value}%`,
+      minHeight: `${value}%`,
+    };
+  },
+  // style: maxWidthPers
+  maxWidthPers: (value) => {
+    /**
+     * Function that returns CSS styles for setting the maximum width as a percentage.
+     * @param {number} value - The maximum width as a percentage.
+     * @returns {Object} CSS styles for setting the maximum width as a percentage.
+     */
+    return {
+      maxWidth: `${value}%`,
+    };
+  },
+  // style: maxHeightPers
+   maxHeightPers: (value) => {
+    /**
+     * Function that returns CSS styles for setting the maximum height as a percentage.
+     * @param {number} value - The maximum height as a percentage.
+     * @returns {Object} CSS styles for setting the maximum height as a percentage.
+     */
+    return {
+      maxHeight: `${value}%`,
+    };
+  },
+  // style: maxWHPers
+  maxWHPers: (value) => {
+    /**
+     * Function that returns CSS styles for setting the maximum width and height as a percentage.
+     * @param {number} value - The maximum width and height as a percentage.
+     * @returns {Object} CSS styles for setting the maximum width and height as a percentage.
+     */
+    return {
+      maxWidth: `${value}%`,
+      maxHeight: `${value}%`,
+    };
+  },
 };
 
 /**
