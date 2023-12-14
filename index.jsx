@@ -462,7 +462,7 @@ function Circle({ children, style = {}, className = "", ...otherProps }) {
  * @throws {Error} Throws an error if the provided element is not one of: "div", "section", "header", "footer".
  * @throws {Error} Throws an error if the URL for the background image is empty.
  */
-function ResBackgImg({
+function RespBackgImg({
   element = "div",
   url = "",
   children,
@@ -686,7 +686,7 @@ export {
   NavUl,
   RespHeading,
   Circle,
-  ResBackgImg,
+  RespBackgImg,
   useActive,
   useHover,
   useMediaQuery,

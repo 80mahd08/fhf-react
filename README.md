@@ -139,9 +139,9 @@ A circular container component.
 A responsive background image component for specified HTML elements.
 
 ```jsx
-<ResBackgImg element="div" url="path/*">
+<RespBackgImg element="div" url="path/*">
   {/* Your content goes here */}
-</ResBackgImg>
+</RespBackgImg>
 ```
 
 ### Styles
@@ -149,11 +149,21 @@ A responsive background image component for specified HTML elements.
 A responsive background image component for specified HTML elements.
 
 ```jsx
-import style  from "fhf-react/styles";
+import { styles, mergeStyles , styleHover , styleActive }  from "fhf-react/styles";
+import { mergeRefs } from "fhf-react"
 
-<div style={{...style.centerPosition , ...style.floatLeft}}>
-  {/* Your centered content goes here */}
-</div>
+const Comp = () =>{
+  const { refLightHover , styleLightHover } = styles.bgLightHover()
+  const { refOfActive , styleOfActive } = styleActive(styles.extremeRounded , styles.bg("green"))
+
+    return(
+        <div ref={mergeRefs(refLightHover , refOfActive)} style={mergeStyles(styles.centerPosition,styles.fitContentHW , styleLightHover , styleOfActive )}>
+          {/* Your centered content goes here */}
+        </div>
+    )
+}
+
+export default Comp
 ```
 Feel free to explore and use these components and styles to create modern and responsive user interfaces in your React projects.
 
