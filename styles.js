@@ -1814,6 +1814,7 @@ const styles = {
      * @returns {Object} CSS styles for setting the maximum width.
      */
     return {
+      width: "100%",
       maxWidth: `${value}px`,
     };
   },
@@ -1825,6 +1826,7 @@ const styles = {
      * @returns {Object} CSS styles for setting the maximum height.
      */
     return {
+      width: "100%",
       maxHeight: `${value}px`,
     };
   },
@@ -1836,6 +1838,7 @@ const styles = {
      * @returns {Object} CSS styles for setting the maximum width and height.
      */
     return {
+      width: "100%",
       maxWidth: `${value}px`,
       maxHeight: `${value}px`,
     };
@@ -1848,6 +1851,7 @@ const styles = {
      * @returns {Object} CSS styles for setting the minimum width.
      */
     return {
+      width: "100%",
       minWidth: `${value}px`,
     };
   },
@@ -1857,8 +1861,9 @@ const styles = {
      * Function that returns CSS styles for setting the minimum height.
      * @param {number} value - The minimum height value.
      * @returns {Object} CSS styles for setting the minimum height.
-     */
-    return {
+    */
+   return {
+      width: "100%",
       minHeight: `${value}px`,
     };
   },
@@ -1870,6 +1875,7 @@ const styles = {
      * @returns {Object} CSS styles for setting the minimum width and height.
      */
     return {
+      width: "100%",
       minWidth: `${value}px`,
       minHeight: `${value}px`,
     };
@@ -1882,6 +1888,7 @@ const styles = {
      * @returns {Object} CSS styles for setting the minimum width as a percentage.
      */
     return {
+      width: "100%",
       minWidth: `${value}%`,
     };
   },
@@ -1893,6 +1900,7 @@ const styles = {
      * @returns {Object} CSS styles for setting the minimum height as a percentage.
      */
     return {
+      width: "100%",
       minHeight: `${value}%`,
     };
   },
@@ -1904,6 +1912,7 @@ const styles = {
      * @returns {Object} CSS styles for setting the minimum width and height as a percentage.
      */
     return {
+      width: "100%",
       minWidth: `${value}%`,
       minHeight: `${value}%`,
     };
@@ -1916,6 +1925,7 @@ const styles = {
      * @returns {Object} CSS styles for setting the maximum width as a percentage.
      */
     return {
+      width: "100%",
       maxWidth: `${value}%`,
     };
   },
@@ -1927,6 +1937,7 @@ const styles = {
      * @returns {Object} CSS styles for setting the maximum height as a percentage.
      */
     return {
+      width: "100%",
       maxHeight: `${value}%`,
     };
   },
@@ -1938,6 +1949,7 @@ const styles = {
      * @returns {Object} CSS styles for setting the maximum width and height as a percentage.
      */
     return {
+      width: "100%",
       maxWidth: `${value}%`,
       maxHeight: `${value}%`,
     };
