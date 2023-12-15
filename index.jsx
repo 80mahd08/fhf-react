@@ -716,6 +716,6 @@ export {
   useMediaQuery,
   useMediaStyle,
   mergeRefs,
-  useHoverStyle?
+  useHoverStyle,
   useActiveStyle,
 };
