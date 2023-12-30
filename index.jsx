@@ -672,28 +672,7 @@ function setRef(val, ...refs) {
   }
 }
 
-/**
- * React Hook for applying styles based on the current state of the element
- * @param { object } style - The style object to be applied when the element is hovered.
- * @returns {object} An object containing a reference to the DOM element and the hover style object.
- */
-function useHoverStyle(style) {
-  const { ref, isHovered } = useHover();
-  let hoverStyle = isHovered ? style : {};
-  return { ref,  hoverStyle};
-}
 
-
-/**
- * React Hook for applying styles based on the current state of the element 
- * @param {object} style - The style object to be applied when the element is active.
- * @returns {object} An object containing a reference to the DOM element and the active style object.
- */
-function useActiveStyle(style) {
-  const { ref, isActive } = useActive();
-  let activeStyle = isActive ? style : {};
-  return { ref,  activeStyle};
-}
 
 
 export {
