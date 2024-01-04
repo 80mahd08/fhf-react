@@ -2092,7 +2092,7 @@ const styles = {
  */
 
 const styleHover = (...style) => {
-  const { ref, isHover } = useHover();
+  const { ref, isHovered } = useHover();
     // If the base style is empty, return an empty style object.
   if (Object.keys(style).length === 0) {    
     return {
@@ -2104,7 +2104,7 @@ const styleHover = (...style) => {
 
   return {
     refOfHover: ref,
-    styleOfHover: isHover ? mergeStyles(...style) : {},
+    styleOfHover: isHovered ? mergeStyles(...style) : {},
   }
 }
 
