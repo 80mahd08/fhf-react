@@ -71,7 +71,7 @@ A responsive image component that scales with the width of its container.
 A responsive video component similar to RespImg.
 
 ```jsx
-<RespVideo src="your-video-url" alt="Video Alt Text" />
+<RespVideo src="your-video-url" />
 ```
 
 ### RespGridFill
@@ -157,7 +157,7 @@ const Comp = () =>{
   const { refOfActive , styleOfActive } = styleActive(styles.extremeRounded , styles.bg("green"))
 
     return(
-        <div ref={mergeRefs(refLightHover , refOfActive)} style={mergeStyles(styles.centerPosition,styles.fitContentHW , styleLightHover , styleOfActive )}>
+        <div ref={mergeRefs( refLightHover , refOfActive )} style={mergeStyles( styles.centerPosition , styles.fitContentHW , styleLightHover , styleOfActive )}>
           {/* Your centered content goes here */}
         </div>
     )
