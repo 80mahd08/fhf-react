@@ -10,10 +10,10 @@
 		"loose-envify": "^1.4.0",
 		"object-assign": "^4.1.1",
 		"react": "^18.2.0",
+		"react-beautiful-dnd": "^13.1.1",
 		"react-is": "^16.13.1"
 	},
-	"scripts": {
-	},
+	"scripts": {},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/80mahd08/fhf-react.git"
@@ -37,7 +37,5 @@
 	"bugs": {
 		"url": "https://github.com/80mahd08/fhf-react/issues"
 	},
-	"homepage": "https://github.com/80mahd08/fhf-react#readme",
-	"devDependencies": {
-	}
+	"homepage": "https://github.com/80mahd08/fhf-react#readme"
 }

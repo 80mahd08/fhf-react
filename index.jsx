@@ -3,18 +3,21 @@ import "fhf/dist/css/FHF.min.css";
 import React from "react";
 import { useEffect, useState, useRef, useCallback } from "react";
 
+
 // ClearFix component
 /**
- * A component that adds a class of "clearFix" to a div element, which is used to clear floated elements.
- * @returns {JSX.Element} A div element with the class "clearFix".
+ * A utility component for layout adjustments, particularly designed to handle floated elements.
+ * This component is used to clear floats and ensure proper rendering and layout within a webpage.
+ * @returns {JSX.Element} An empty <div> element with the class "clearFix".
  */
 function ClearFix() {
   return <div className="clearFix"></div>;
 }
 
+
 // Container component
 /**
- * A component that adds a class of "container" to a div element, which is a CSS class that is used to create a responsive layout with a fixed width and variable height.
+ * responsive container with variable width based on the screen size.
  * @param {Object} props - The component props.
  * @param {React.ReactNode} props.children - The child elements to be displayed inside the container.
  * @param {Object} props.style - The CSS styles to be applied to the container.
@@ -31,12 +34,12 @@ function Container({ children, style = {}, className = "", ...otherProps }) {
 
 // FlexContainer component
 /**
- * A component that creates a flex container, which is a CSS layout that allows elements to be laid out in a flexible box.
+ * A component that creates a flex container, which allows elements to be laid out in a flexible box.
  * @param {Object} props - The component props.
  * @param {React.ReactNode} props.children - The child elements to be displayed inside the flex container.
  * @param {Object} props.style - The CSS styles to be applied to the flex container.
  * @param {string} props.className - The additional CSS class to be applied to the flex container.
- * @returns {JSX.Element} A div element with the class "flex-container" and the specified child elements and styles.
+ * @returns {JSX.Element} A div element
  */
 function FlexContainer({
   children,
@@ -57,12 +60,12 @@ function FlexContainer({
 
 // FlexItem component
 /**
- * A component that creates a flex item, which is a CSS layout that allows elements to be laid out in a flexible box.
+ * A component that creates a flex item, which allows elements to be laid out in a flexible box.
  * @param {Object} props - The component props.
  * @param {React.ReactNode} props.children - The child elements to be displayed inside the flex item.
  * @param {Object} props.style - The CSS styles to be applied to the flex item.
  * @param {string} props.className - The additional CSS class to be applied to the flex item.
- * @returns {JSX.Element} A div element with the class "flex-item" and the specified child elements and styles.
+ * @returns {JSX.Element} A div element
  */
 function FlexItem({ children, style = {}, className = "", ...otherProps }) {
   return (
@@ -160,6 +163,7 @@ function RespImg({ src, alt, style = {}, className = "", ...otherProps }) {
   );
 }
 
+
 // RespVideo component
 /**
  * A responsive video component that automatically adjusts its size based on the viewport width.
@@ -202,7 +206,7 @@ function RespVideo({
 
 // RespGridFill component
 /**
- * A responsive grid component with automatic column sizing based on the specified size and gap.
+ * A responsive grid component with automatic column sizing based on the specified size and gap, using auto-fill.
  * @param {Object} props - The component props.
  * @param {React.ReactNode} props.children - The child elements to be displayed inside the grid.
  * @param {number} props.size - The size of each grid item in pixels.
@@ -695,6 +699,4 @@ export {
   useMediaQuery,
   useMediaStyle,
   mergeRefs,
-  useHoverStyle,
-  useActiveStyle,
 };
