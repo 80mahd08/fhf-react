@@ -2110,6 +2110,18 @@ const styles = {
   neonText: (color) => ({
     textShadow: `0 0 10px ${color}, 0 0 20px ${color}, 0 0 30px ${color}`,
   }),
+  /**
+   * Set the styles for a card with rounded corners.
+   * @param {string} bgColor - The background color of the card.
+   * @param {string} borderRadius - The border radius of the card.
+   * @returns {object} - The styles object for a card with rounded corners.
+   */
+  roundedCard: (bgColor, borderRadius) => ({
+    backgroundColor: bgColor,
+    borderRadius,
+    padding: "20px",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  }),
 };
 
 /**
