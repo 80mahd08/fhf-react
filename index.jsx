@@ -3,7 +3,7 @@ import "fhf/dist/css/FHF.min.css";
 import React from "react";
 import { useEffect, useState, useRef, useCallback } from "react";
 import styled from 'styled-components';
-import { floatAnimation, floatHorizontalAnimation, floatingAnimation, pulseAnimationKeyframes } from "./tools/jsTools";
+import { floatAnimation, floatHorizontalAnimation, floatAnimation, pulseAnimationKeyframes } from "./tools/jsTools";
 
 
 
