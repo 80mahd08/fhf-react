@@ -2,6 +2,9 @@
 import "fhf/dist/css/FHF.min.css";
 import React from "react";
 import { useEffect, useState, useRef, useCallback } from "react";
+import styled from 'styled-components';
+import { floatAnimation, floatHorizontalAnimation, floatingAnimation, pulseAnimationKeyframes } from "./tools/jsTools";
+
 
 
 // ClearFix component
@@ -509,6 +512,69 @@ function RespBackgImg({
   }
 }
 
+/**
+ * A styled div component with a floating animation.
+ *
+ * @component
+ * @example
+ * // Example usage of FloatingDiv
+ * <FloatingDiv distance={20} duration={2} vertical>
+ *   Hello, I'm floating vertically!
+ * </FloatingDiv>
+ *
+ * @param {Object} props - The component props.
+ * @param {number} props.distance - The distance to float up and down or left and right.
+ * @param {number} props.duration - The duration of the animation in seconds.
+ * @param {boolean} [props.vertical] - If true, the floating animation is vertical. If false, it's horizontal.
+ */
+const FloatingDiv = styled.div`
+  animation: ${(props) => (props.vertical ? floatAnimation(props.distance) : floatHorizontalAnimation(props.distance))} ${(props) => props.duration}s infinite alternate;
+`;
+
+/**
+ * Styled component for a pulse animation effect.
+ *
+ * @component
+ * @example
+ * // Usage example
+ * <PulseAnimation duration={1}>Content Goes Here</PulseAnimation>
+ *
+ * @param {Object} props - Component properties.
+ * @param {number} props.duration - Duration of the pulse animation in seconds.
+ * @returns {React.Component} The PulseAnimation styled component.
+ */
+const PulseAnimation = styled.div`
+  animation: ${pulseAnimationKeyframes} ${(props) => props.duration}s infinite;
+`;
+
+/**
+ * Styled component with a scale animation on hover.
+ *
+ * @component
+ * @example
+ * // Usage of ScalableComponent
+ * function MyComponent() {
+ *   return (
+ *     <ScalableComponent val={1.1}>
+ *       <p>This content will scale on hover!</p>
+ *     </ScalableComponent>
+ *   );
+ * }
+ *
+ * @param {Object} props - Component properties.
+ * @param {number} props.val - Scale factor for the transformation on hover.
+ * @returns {JSX.Element} - ScalableComponent.
+ */
+const ScaleComp = styled.div`
+  /* Define initial styles */
+  transition: transform 0.3s ease-in-out;
+  
+  /* Apply scale transformation on hover */
+  &:hover {
+    transform: scale(${(props) => props.val});
+  }
+`;
+
 //custom hook
 /**
  * React Hook for responsive media queries.
@@ -699,4 +765,7 @@ export {
   useMediaQuery,
   useMediaStyle,
   mergeRefs,
+  FloatingDiv,
+  PulseAnimation,
+  ScaleComp,
 };

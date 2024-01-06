@@ -2081,7 +2081,35 @@ const styles = {
         };
       },
     }
-  }
+  },
+  /**
+   * Create text with a gradient effect.
+   * @param {string} angle - Gradient angle (e.g., 'to right', '45deg').
+   * @param {string} colors - Comma-separated list of gradient colors (e.g., 'red, blue').
+   * @returns {Object} - CSS styles for text with a gradient effect.
+   */
+  gradientText: (angle, colors) => ({
+    background: `linear-gradient(${angle}, ${colors})`,
+    WebkitBackgroundClip: 'text',
+    color: 'transparent',
+  }),
+  /**
+   * Set responsive spacing between flex items and gird items.
+   * @param {number} minSpacing - Minimum spacing value.
+   * @param {number} maxSpacing - Maximum spacing value.
+   * @returns {Object} - CSS styles for responsive flex spacing.
+   */
+  flexibleGap: (minSpacing, maxSpacing) => ({
+    gap: `clamp(${minSpacing}px, 2vw, ${maxSpacing}px)`,
+  }),
+  /**
+   * Create a neon text effect.
+   * @param {string} color - Neon color.
+   * @returns {Object} - CSS styles for neon text effect.
+   */
+  neonText: (color) => ({
+    textShadow: `0 0 10px ${color}, 0 0 20px ${color}, 0 0 30px ${color}`,
+  }),
 };
 
 /**
