@@ -1,5 +1,5 @@
 // Import statements
-import "fhf/dist/css/FHF.min.css";
+import "fhf";
 import React from "react";
 import { useEffect, useState, useRef, useCallback } from "react";
 
@@ -522,7 +522,4 @@ export {
   useMediaQuery,
   useMediaStyle,
   mergeRefs,
-  FloatingDiv,
-  PulseAnimation,
-  ScaleComp,
 };
