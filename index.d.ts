@@ -310,7 +310,7 @@ interface GridSystem {
   column(span: number, offset?: number): GridSystem;
 }
 
-type Styles = {
+declare const styles: {
   /**
    * CSS styles for centering an element using absolute positioning and translate.
    * @type {CSSProperties}
@@ -1546,84 +1546,84 @@ type Styles = {
    * @returns {CSSProperties} CSS styles for setting the maximum width.
    */
 
-  maxWidthPx: (value: number) => CSSProperties;
+  maxWidthPx?: (value: number) => CSSProperties;
   /**
    * Function that returns CSS styles for setting the maximum height in pixels.
    * @param {number} value - The maximum height value.
    * @returns {CSSProperties} CSS styles for setting the maximum height.
    */
 
-  maxHeightPx: (value: number) => CSSProperties;
+  maxHeightPx?: (value: number) => CSSProperties;
   /**
    * Function that returns CSS styles for setting the maximum width and height in pixels.
    * @param {number} value - The maximum width and height value.
    * @returns {CSSProperties} CSS styles for setting the maximum width and height.
    */
 
-  maxWHPx: (value: number) => CSSProperties;
+  maxWHPx?: (value: number) => CSSProperties;
   /**
    * Function that returns CSS styles for setting the minimum width in pixels.
    * @param {number} value - The minimum width value.
    * @returns {CSSProperties} CSS styles for setting the minimum width.
    */
 
-  minWidthPx: (value: number) => CSSProperties;
+  minWidthPx?: (value: number) => CSSProperties;
   /**
    * Function that returns CSS styles for setting the minimum height in pixels.
    * @param {number} value - The minimum height value.
    * @returns {CSSProperties} CSS styles for setting the minimum height.
    */
 
-  minHeightPx: (value: number) => CSSProperties;
+  minHeightPx?: (value: number) => CSSProperties;
   /**
    * Function that returns CSS styles for setting the minimum width and height in pixels.
    * @param {number} value - The minimum width and height value.
    * @returns {CSSProperties} CSS styles for setting the minimum width and height.
    */
 
-  minWHPx: (value: number) => CSSProperties;
+  minWHPx?: (value: number) => CSSProperties;
   /**
    * Function that returns CSS styles for setting the minimum width as a percentage.
    * @param {number} value - The minimum width as a percentage.
    * @returns {CSSProperties} CSS styles for setting the minimum width as a percentage.
    */
 
-  minHeightPers: (valu: number) => CSSProperties;
+  minHeightPers?: (valu: number) => CSSProperties;
   /**
    * Function that returns CSS styles for setting the minimum height as a percentage.
    * @param {number} value - The minimum height as a percentage.
    * @returns {CSSProperties} CSS styles for setting the minimum height as a percentage.
    */
 
-  minWidthPers: (value: number) => CSSProperties;
+  minWidthPers?: (value: number) => CSSProperties;
   /**
    * Function that returns CSS styles for setting the minimum width and height as a percentage.
    * @param {number} value - The minimum width and height as a percentage.
    * @returns {CSSProperties} CSS styles for setting the minimum width and height as a percentage.
    */
 
-  minWHPers: (value: number) => CSSProperties;
+  minWHPers?: (value: number) => CSSProperties;
   /**
    * Function that returns CSS styles for setting the maximum width as a percentage.
    * @param {number} value - The maximum width as a percentage.
    * @returns {CSSProperties} CSS styles for setting the maximum width as a percentage.
    */
 
-  maxWidthPers: (value: number) => CSSProperties;
+  maxWidthPers?: (value: number) => CSSProperties;
   /**
    * Function that returns CSS styles for setting the maximum height as a percentage.
    * @param {number} value - The maximum height as a percentage.
    * @returns {CSSProperties} CSS styles for setting the maximum height as a percentage.
    */
 
-  maxHeightPers: (value: number) => CSSProperties;
+  maxHeightPers?: (value: number) => CSSProperties;
   /**
    * Function that returns CSS styles for setting the maximum width and height as a percentage.
    * @param {number} value - The maximum width and height as a percentage.
    * @returns {CSSProperties} CSS styles for setting the maximum width and height as a percentage.
    */
 
-  maxWHPers: (value: number) => CSSProperties;
+  maxWHPers?: (value: number) => CSSProperties;
   /**
    * Generates styles for a grid system with a specified number of columns and gap.
    * @param {number} [numColumns=1] - Number of columns in the grid.
@@ -1631,7 +1631,7 @@ type Styles = {
    * @returns {GridSystem} Styles for the grid system.
    */
 
-  gridSystem(numColumns: number, gapValue: number): GridSystem;
+  gridSystem?(numColumns: number, gapValue: number): GridSystem;
   /**
    * Create text with a gradient effect.
    * @param {string} angle - Gradient angle (e.g., 'to right', '45deg').
@@ -1639,7 +1639,7 @@ type Styles = {
    * @returns {CSSProperties} - CSS styles for text with a gradient effect.
    */
 
-  gradientText: (angle: string, colors: string) => CSSProperties;
+  gradientText?: (angle: string, colors: string) => CSSProperties;
   /**
    * Set responsive spacing between flex items and gird items.
    * @param {number} minSpacing - Minimum spacing value.
@@ -1647,14 +1647,14 @@ type Styles = {
    * @returns {CSSProperties} - CSS styles for responsive flex spacing.
    */
 
-  flexibleGap: (minSpacing: number, maxSpacing: number) => CSSProperties;
+  flexibleGap?: (minSpacing: number, maxSpacing: number) => CSSProperties;
   /**
    * Create a neon text effect.
    * @param {string} color - Neon color.
    * @returns {CSSProperties} - CSS styles for neon text effect.
    */
 
-  neonText: (color: string) => CSSProperties;
+  neonText?: (color: string) => CSSProperties;
   /**
    * Set the styles for a card with rounded corners.
    * @param {string} bgColor - The background color of the card.
@@ -1662,7 +1662,7 @@ type Styles = {
    * @returns {CSSProperties} - The styles for a card with rounded corners.
    */
 
-  roundedCard: (bgColor: string, borderRadius: string) => CSSProperties;
+  roundedCard?: (bgColor: string, borderRadius: string) => CSSProperties;
 };
 /**
  * Utility function for handling styles based on hover state.
@@ -1671,7 +1671,7 @@ type Styles = {
  * @returns {CSSProperties} An CSSProperties containing the reference and hover-based style.
  */
 
-type StyleHover = (...styles: CSSProperties[]) => {
+declare function styleHover(...styles: CSSProperties[]): {
   refOfHover: React.RefObject<any>;
   styleOfHover: CSSProperties;
 };
@@ -1682,7 +1682,7 @@ type StyleHover = (...styles: CSSProperties[]) => {
  * @returns {CSSProperties} An CSSProperties containing the reference and active state-based style.
  */
 
-type StyleActive = (...styles: CSSProperties[]) => {
+declare function styleActive(...styles: CSSProperties[]): {
   refOfActive: React.RefObject<any>;
   styleOfActive: CSSProperties;
 };
@@ -1692,7 +1692,7 @@ type StyleActive = (...styles: CSSProperties[]) => {
  * @returns {CSSProperties} The merged CSSProperties.
  */
 
-type MergeStyles = (...styles: CSSProperties[]) => CSSProperties;
+declare function mergeStyles(...styles: CSSProperties[]): CSSProperties;
 
 export {
   ClearFix,
@@ -1714,8 +1714,8 @@ export {
   useMediaQuery,
   useMediaStyle,
   mergeRefs,
-  Styles as styles,
-  MergeStyles as mergeStyles,
-  StyleHover as styleHover,
-  StyleActive as styleActive,
+  styles,
+  mergeStyles,
+  styleHover,
+  styleActive,
 };
