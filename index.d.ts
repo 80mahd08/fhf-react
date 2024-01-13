@@ -112,7 +112,6 @@ declare function RespImg(props: {
  */
 declare function RespVideo(props: {
   src: string;
-  alt: string;
   style?: React.CSSProperties;
   className?: string;
   [key: string]: any;
@@ -205,10 +204,27 @@ declare function NavUl(props: {
  * @returns {JSX.Element} A heading element with responsive styling.
  */
 declare function RespHeading(props: {
-  element?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  level: 1 | 2 | 3 | 4 | 5 | 6;
   style?: React.CSSProperties;
   className?: string;
   children: React.ReactNode;
+  [key: string]: any;
+}): JSX.Element;
+
+// Component: RespP
+/**
+ * A React functional component that renders a paragraph element with responsive font size.
+ * @param {object} props - The properties passed to the component.
+ * @param {object} props.style - The inline CSS styles to apply to the paragraph element.
+ * @param {string} props.className - The CSS class name to apply to the paragraph element.
+ * @param {node} props.children - The content to display inside the paragraph element.
+ * @param {any} otherProps - Any additional properties to pass to the paragraph element.
+ * @returns {JSX.Element} The paragraph element with responsive font size.
+ */
+declare function RespP(props: {
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+  className?: string;
   [key: string]: any;
 }): JSX.Element;
 
@@ -1707,6 +1723,7 @@ export {
   UnstyledList,
   NavUl,
   RespHeading,
+  RespP,
   Circle,
   RespBackgImg,
   useActive,

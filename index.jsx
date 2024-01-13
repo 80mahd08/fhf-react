@@ -117,13 +117,7 @@ function RespImg({ src, alt, style = {}, className = "", ...otherProps }) {
   );
 }
 
-function RespVideo({
-  src = "",
-  alt,
-  style = {},
-  className = "",
-  ...otherProps
-}) {
+function RespVideo({ src = "", style = {}, className = "", ...otherProps }) {
   if (src === undefined || src === "") {
     throw new Error("src cannot be undefined or empty");
   }
@@ -139,7 +133,6 @@ function RespVideo({
   return (
     <video
       src={src}
-      alt={alt}
       style={combinedStyles}
       className={className}
       {...otherProps}
@@ -261,22 +254,15 @@ function NavUl({ children, style = {}, className = "", ...otherProps }) {
 }
 
 function RespHeading({
-  element = "h1",
+  level = 1,
   style = {},
   className = "",
   children,
   ...otherProps
 }) {
-  if (
-    element !== "h1" &&
-    element !== "h2" &&
-    element !== "h3" &&
-    element !== "h4" &&
-    element !== "h5" &&
-    element !== "h6"
-  ) {
+  if (level < 1 || level > 6) {
     throw new Error(
-      "Incorrect element value in RespHeading; it should be one of those (h1, h2, h3, h4, h5, h6)"
+      "Incorrect element value in RespHeading; it should be level between 1 and 6"
     );
   } else {
     const responsiveTypography = {
@@ -299,7 +285,7 @@ function RespHeading({
         fontSize: "clamp(14px, 1.5vw, 18px)",
       },
     };
-
+    const element = `h${level}`;
     const combinedStyles = {
       ...responsiveTypography[element],
       ...style,
@@ -315,6 +301,19 @@ function RespHeading({
       children
     );
   }
+}
+
+function RespP({ style = {}, className = "", children, ...otherProps }) {
+  const combinedStyles = {
+    fontSize: "clamp(16px, 1.2vw, 20px)",
+    ...style,
+  };
+
+  return (
+    <p style={combinedStyles} className={`${className}`} {...otherProps}>
+      {children}
+    </p>
+  );
 }
 
 function Circle({ children, style = {}, className = "", ...otherProps }) {
@@ -1621,6 +1620,7 @@ export {
   UnstyledList,
   NavUl,
   RespHeading,
+  RespP,
   Circle,
   RespBackgImg,
   useActive,
