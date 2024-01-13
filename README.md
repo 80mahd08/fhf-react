@@ -6,7 +6,7 @@
 
 ## Introduction
 
- This framework provides a collection of reusable components and styles to help you build responsive and flexible web layouts effortlessly.
+This framework provides a collection of reusable components and styles to help you build responsive and flexible web layouts effortlessly.
 
 ## Components
 
@@ -23,9 +23,7 @@ A utility component for clearing floats and ensuring proper layout.
 A flexible container component with optional styles and class names.
 
 ```jsx
-<Container>
-  {/* Your content goes here */}
-</Container>
+<Container>{/* Your content goes here */}</Container>
 ```
 
 ### FlexContainer
@@ -33,9 +31,7 @@ A flexible container component with optional styles and class names.
 A flexible container for creating flex layouts.
 
 ```jsx
-<FlexContainer>
-  {/* Flex items go here */}
-</FlexContainer>
+<FlexContainer>{/* Flex items go here */}</FlexContainer>
 ```
 
 ### FlexItem
@@ -43,9 +39,7 @@ A flexible container for creating flex layouts.
 A flexible container for creating flex layouts.
 
 ```jsx
-<FlexItem>
-  {/* Your content goes here */}
-</FlexItem>
+<FlexItem>{/* Your content goes here */}</FlexItem>
 ```
 
 ### DivV
@@ -99,9 +93,7 @@ Similar to RespGridFill, but with auto-fitting columns.
 An unordered list component with no list styles.
 
 ```jsx
-<UnstyledList>
-  {/* List items go here */}
-</UnstyledList>
+<UnstyledList>{/* List items go here */}</UnstyledList>
 ```
 
 ### NavUl
@@ -109,9 +101,7 @@ An unordered list component with no list styles.
 A styled ul component for navigation items.
 
 ```jsx
-<NavUl>
-  {/* Navigation items go here */}
-</NavUl>
+<NavUl>{/* Navigation items go here */}</NavUl>
 ```
 
 ### RespHeading
@@ -119,9 +109,7 @@ A styled ul component for navigation items.
 A responsive heading component with different font sizes based on the heading level.
 
 ```jsx
-<RespHeading element="h2">
-  {/* Your heading text goes here */}
-</RespHeading>
+<RespHeading element="h2">{/* Your heading text goes here */}</RespHeading>
 ```
 
 ### Circle
@@ -129,9 +117,7 @@ A responsive heading component with different font sizes based on the heading le
 A circular container component.
 
 ```jsx
-<Circle>
-  {/* Your content goes here */}
-</Circle>
+<Circle>{/* Your content goes here */}</Circle>
 ```
 
 ### ResBackgImg
@@ -149,22 +135,39 @@ A responsive background image component for specified HTML elements.
 A responsive background image component for specified HTML elements.
 
 ```jsx
-import { styles, mergeStyles , styleHover , styleActive }  from "fhf-react/styles";
-import { mergeRefs } from "fhf-react"
+import {
+  styles,
+  mergeStyles,
+  styleHover,
+  styleActive,
+  mergeRefs,
+} from "fhf-react";
 
-const Comp = () =>{
-  const { refLightHover , styleLightHover } = styles.bgLightHover()
-  const { refOfActive , styleOfActive } = styleActive(styles.extremeRounded , styles.bg("green"))
+const Comp = () => {
+  const { refLightHover, styleLightHover } = styles.bgLightHover();
+  const { refOfActive, styleOfActive } = styleActive(
+    styles.extremeRounded,
+    styles.bg("green")
+  );
 
-    return(
-        <div ref={mergeRefs( refLightHover , refOfActive )} style={mergeStyles( styles.centerPosition , styles.fitContentHW , styleLightHover , styleOfActive )}>
-          {/* Your centered content goes here */}
-        </div>
-    )
-}
+  return (
+    <div
+      ref={mergeRefs(refLightHover, refOfActive)}
+      style={mergeStyles(
+        styles.centerPosition,
+        styles.fitContentHW,
+        styleLightHover,
+        styleOfActive
+      )}
+    >
+      {/* Your centered content goes here */}
+    </div>
+  );
+};
 
-export default Comp
+export default Comp;
 ```
+
 Feel free to explore and use these components and styles to create modern and responsive user interfaces in your React projects.
 
 Happy coding!
