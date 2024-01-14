@@ -295,7 +295,10 @@ declare function useMediaStyle(
  * @returns {{ref: React.RefObject, isHovered: boolean}} An object containing a reference to the DOM element and the current hover state.
  */
 
-declare function useHover(): { ref: React.RefObject<any>; isHovered: boolean };
+declare function useHover(): {
+  refOfUseHover: React.RefObject<any>;
+  useHoverIsHovered: boolean;
+};
 
 /**
  * React Hook for handling active state based on mouse events.
@@ -303,7 +306,10 @@ declare function useHover(): { ref: React.RefObject<any>; isHovered: boolean };
  * @returns {{ ref: React.MutableRefObject, isActive: boolean }} An object containing a mutable reference to the DOM element and the active state.
  */
 
-declare function useActive(): { ref: React.RefObject<any>; isActive: boolean };
+declare function useActive(): {
+  refOfUseActive: React.RefObject<any>;
+  useActiveIsActive: boolean;
+};
 
 /**
  * React Hook for merging multiple React refs into a single ref object.
