@@ -410,24 +410,24 @@ const useMediaStyle = (query, style) => {
 };
 
 function useHover() {
-  // Initialize the state variable 'isHovered' with the initial hover state.
-  const [isHovered, setIsHovered] = useState(false);
+  // Initialize the state variable 'useHoverIsHovered' with the initial hover state.
+  const [useHoverIsHovered, setUseHoverIsHovered] = useState(false);
 
-  // Create a ref to store the reference to the DOM element.
-  const ref = useRef(null);
+  // Create a refOfUseHover to store the reference to the DOM element.
+  const refOfUseHover = useRef(null);
 
   // Define memoized functions to handle mouse enter and mouse leave events.
   const handleMouseEnter = useCallback(() => {
-    setIsHovered(true);
+    setUseHoverIsHovered(true);
   }, []);
 
   const handleMouseLeave = useCallback(() => {
-    setIsHovered(false);
+    setUseHoverIsHovered(false);
   }, []);
 
   // useEffect is used to set up the subscription to the mouse enter and mouse leave events.
   useEffect(() => {
-    const element = ref.current;
+    const element = refOfUseHover.current;
 
     if (element) {
       element.addEventListener("mouseenter", handleMouseEnter);
@@ -442,28 +442,28 @@ function useHover() {
   }, [handleMouseEnter, handleMouseLeave]);
 
   // Return an object containing a reference to the DOM element and the current hover state.
-  return { ref, isHovered };
+  return { refOfUseHover, useHoverIsHovered };
 }
 
 function useActive() {
-  // Initialize the state variable 'isActive' with the initial active state.
-  const [isActive, setIsActive] = useState(false);
+  // Initialize the state variable 'useActiveIsActive' with the initial active state.
+  const [useActiveIsActive, setUseActiveIsActive] = useState(false);
 
-  // Create a ref to store the reference to the DOM element.
-  const ref = useRef(null);
+  // Create a refOfUseActive to store the reference to the DOM element.
+  const refOfUseActive = useRef(null);
 
   // Define memoized functions to handle mouse down and mouse up events.
   const handleMouseDown = useCallback(() => {
-    setIsActive(true);
+    setUseActiveIsActive(true);
   }, []);
 
   const handleMouseUp = useCallback(() => {
-    setIsActive(false);
+    setUseActiveIsActive(false);
   }, []);
 
   // useEffect is used to set up the subscription to the mouse down and mouse up events.
   useEffect(() => {
-    const element = ref.current;
+    const element = refOfUseActive.current;
 
     if (element) {
       element.addEventListener("mousedown", handleMouseDown);
@@ -478,7 +478,7 @@ function useActive() {
   }, [handleMouseDown, handleMouseUp]);
 
   // Return an object containing a mutable reference to the DOM element and the current active state.
-  return { ref, isActive };
+  return { refOfUseActive, useActiveIsActive };
 }
 
 function mergeRefs(...refs) {
