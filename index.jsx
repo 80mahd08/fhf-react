@@ -1573,7 +1573,7 @@ const styles = {
 const styleHover = (...style) => {
   const { ref, isHovered } = useHover();
   // If the base style is empty, return an empty style CSSProperties.
-  if (CSSProperties.keys(style).length === 0) {
+  if (Object.keys(style).length === 0) {
     return {
       refOfHover: ref,
       styleOfHover: {},
@@ -1590,7 +1590,7 @@ const styleHover = (...style) => {
 const styleActive = (...style) => {
   const { ref, isActive } = useActive();
   // If the base style is empty, return an empty style CSSProperties.
-  if (CSSProperties.keys(style).length === 0) {
+  if (Object.keys(style).length === 0) {
     return {
       refOfActive: ref,
       styleOfActive: {},
