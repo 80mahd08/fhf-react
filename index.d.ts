@@ -1716,6 +1716,17 @@ declare function styleActive(...styles: CSSProperties[]): {
 
 declare function mergeStyles(...styles: CSSProperties[]): CSSProperties;
 
+/**
+ * Generates a keyframe animation and adds it to the document's adopted style sheets.
+ * @param {string} animationName - The name of the keyframe animation.
+ * @param {Array<CSSProperties>} styleArrayOfCSSProperties - An array of objects representing the CSS properties of each keyframe.
+ * @return {void} This function does not return anything.
+ */
+declare function animationKeyframe(
+  animationName: string,
+  styleArrayOfCSSProperties: CSSProperties[]
+): void;
+
 export {
   ClearFix,
   Container,
@@ -1741,4 +1752,5 @@ export {
   mergeStyles,
   styleHover,
   styleActive,
+  animationKeyframe,
 };

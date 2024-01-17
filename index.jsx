@@ -12,6 +12,7 @@ import {
   isValidAContent,
 } from "./tools/validation";
 import GridSystemOop from "./tools/GridSystemOop";
+import generateKeyframeFromStyles from "./tools/animationKeyFrameTools.js";
 
 function ClearFix() {
   return <div className="clearFix"></div>;
@@ -1607,6 +1608,15 @@ const mergeStyles = (...args) => {
   return Object.assign({}, ...args);
 };
 
+const animationKeyframe = (animationName, styleArrayOfCSSProperties) => {
+  const sheet = new CSSStyleSheet();
+  sheet.replaceSync(`
+      @keyframes ${animationName} {${generateKeyframeFromStyles(
+    styleArrayOfCSSProperties
+  )}}`);
+  document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
+};
+
 export {
   ClearFix,
   Container,
@@ -1632,4 +1642,5 @@ export {
   mergeStyles,
   styleHover,
   styleActive,
+  animationKeyframe,
 };
