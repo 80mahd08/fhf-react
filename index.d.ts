@@ -1,6 +1,7 @@
 // Import statements
 import React from "react";
 import { CSSProperties } from "react";
+import GridSystemOop from "./tools/GridSystemOop";
 
 // ClearFix component
 /**
@@ -322,15 +323,10 @@ declare function mergeRefs(
   ...refs: React.RefObject<any>[]
 ): React.RefObject<any>;
 
-interface GridSystemStyles {
-  container: CSSProperties;
-  column?: CSSProperties;
-}
-
-interface GridSystem {
-  styles: GridSystemStyles;
-  column(span: number, offset?: number): GridSystem;
-}
+type GridSystemFunction = (
+  numColumns?: number,
+  gapValue?: number
+) => GridSystemOop;
 
 declare const styles: {
   /**
@@ -930,13 +926,15 @@ declare const styles: {
    * @param {string} property - The CSS property to transition.
    * @param {number} duration - The duration of the transition.
    * @param {number} timingFunction - The timing function of the transition.
+   * @param {number} delay - The delay of the transition.
    * @returns {CSSProperties} CSS styles for the transition effect.
    */
 
   transition?: (
     property: string,
     duration: number,
-    timingFunction: number
+    timingFunction?: number,
+    delay?: number
   ) => CSSProperties;
   /**
    * Function that returns CSS styles for rotating an element.
@@ -976,14 +974,6 @@ declare const styles: {
    */
 
   noPointerEvents?: CSSProperties;
-  /**
-   * Function that returns CSS styles for adding a transition effect to all properties.
-   * @param {number} duration - The duration of the transition.
-   * @param {number} timingFunction - The timing function of the transition.
-   * @returns {CSSProperties} CSS styles for the transition effect on all properties.
-   */
-
-  transitionAll?: (duration: number, timingFunction: number) => CSSProperties;
   /**
    * CSS style for enabling auto overflow.
    * @type {CSSProperties}
@@ -1653,7 +1643,7 @@ declare const styles: {
    * @returns {GridSystem} Styles for the grid system.
    */
 
-  gridSystem?(numColumns: number, gapValue: number): GridSystem;
+  gridSystem?: GridSystemFunction;
   /**
    * Create text with a gradient effect.
    * @param {string} angle - Gradient angle (e.g., 'to right', '45deg').
@@ -1685,6 +1675,30 @@ declare const styles: {
    */
 
   roundedCard?: (bgColor: string, borderRadius: string) => CSSProperties;
+
+  /**
+   * This function generates an animation property value.
+   *
+   * @param {string} name - The name of the animation.
+   * @param {number} duration - The duration of the animation in seconds.
+   * @param {string} timingFunction - The timing function of the animation.
+   * @param {number} delay - The delay of the animation in seconds.
+   * @param {number} iterationCount - The number of times the animation should repeat.
+   * @param {string} direction - The direction of the animation.
+   * @param {string} fillMode - The fill mode of the animation.
+   * @param {string} playState - The play state of the animation.
+   * @return {CSSProperties} The generated animation property value.
+   */
+  animation?: (
+    name: string,
+    duration: number,
+    timingFunction?: string,
+    delay?: number,
+    iterationCount?: number,
+    direction?: string,
+    fillMode?: string,
+    playState?: string
+  ) => CSSProperties;
 };
 /**
  * Utility function for handling styles based on hover state.

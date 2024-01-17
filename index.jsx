@@ -946,9 +946,9 @@ const styles = {
   positionStatic: {
     position: "static",
   },
-  transition: (property, duration, timingFunction) => {
+  transition: (property, duration, timingFunction, delay) => {
     return {
-      transition: `${property} ${duration}s ${timingFunction}s`,
+      transition: `${property} ${duration}s ${timingFunction}s ${delay}s`,
     };
   },
 
@@ -977,12 +977,6 @@ const styles = {
 
   noPointerEvents: {
     pointerEvents: "none",
-  },
-
-  transitionAll: (duration, timingFunction) => {
-    return {
-      transition: `all ${duration}s ${timingFunction}s`,
-    };
   },
 
   overflowAuto: {
@@ -1568,6 +1562,18 @@ const styles = {
     borderRadius,
     padding: "20px",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  }),
+  animation: (
+    name,
+    duration,
+    timingFunction,
+    delay,
+    iterationCount,
+    direction,
+    fillMode,
+    playState
+  ) => ({
+    animation: `${name} ${duration}s ${timingFunction}s ${delay}s ${iterationCount} ${direction} ${fillMode} ${playState}`,
   }),
 };
 
