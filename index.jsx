@@ -1,5 +1,5 @@
 // Import statements
-import "fhf";
+import "fhf/dist/layout.min.css";
 import React from "react";
 import { useEffect, useState, useRef, useCallback } from "react";
 import {
@@ -15,7 +15,7 @@ import GridSystemOop from "./tools/GridSystemOop";
 import generateKeyframeFromStyles from "./tools/animationKeyFrameTools.js";
 
 function ClearFix() {
-  return <div className="clearFix"></div>;
+  return <div className="clear-fix"></div>;
 }
 
 function Container({ children, style = {}, className = "", ...otherProps }) {
@@ -65,17 +65,17 @@ function DivV({
     );
   }
   const visibilityClasses = {
-    xs: "visibleXs",
-    sm: "visibleSm",
-    md: "visibleMd",
-    lg: "visibleLg",
+    xs: "visible-xs",
+    sm: "visible-sm",
+    md: "visible-md",
+    lg: "visible-lg",
   };
 
   const hiddenClasses = {
-    xs: "hiddenXs",
-    sm: "hiddenSm",
-    md: "hiddenMd",
-    lg: "hiddenLg",
+    xs: "hidden-xs",
+    sm: "hidden-sm",
+    md: "hidden-md",
+    lg: "hidden-lg",
   };
 
   const getVisibilityClass = (visibility, classes) =>
@@ -1567,11 +1567,11 @@ const styles = {
     name,
     duration,
     timingFunction,
-    delay,
-    iterationCount,
-    direction,
-    fillMode,
-    playState
+    delay = 0,
+    iterationCount = 1,
+    direction = "normal",
+    fillMode = "none",
+    playState = "running"
   ) => ({
     animation: `${name} ${duration}s ${timingFunction}s ${delay}s ${iterationCount} ${direction} ${fillMode} ${playState}`,
   }),
