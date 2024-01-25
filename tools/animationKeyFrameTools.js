@@ -29,4 +29,4 @@ function convertToCssKey(property) {
     .replace(/^./, (str) => str.toLowerCase());
 }
 
-export default generateKeyframeFromStyles;
+export { convertToCssKey, styleObjectToCss, generateKeyframeFromStyles };

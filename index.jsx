@@ -12,7 +12,12 @@ import {
   isValidAContent,
 } from "./tools/validation";
 import GridSystemOop from "./tools/GridSystemOop";
-import generateKeyframeFromStyles from "./tools/animationKeyFrameTools.js";
+import {
+  styleObjectToCss,
+  generateKeyframeFromStyles,
+  convertToCssKey,
+} from "./tools/animationKeyFrameTools.js";
+import { generateWarnings } from "./tools/applyStylesTools.js";
 
 function ClearFix() {
   return <div className="clear-fix"></div>;
@@ -1566,7 +1571,7 @@ const styles = {
   animation: (
     name,
     duration,
-    timingFunction,
+    timingFunction = "ease",
     delay = 0,
     iterationCount = 1,
     direction = "normal",
@@ -1577,50 +1582,140 @@ const styles = {
   }),
 };
 
-const styleHover = (...style) => {
+const hoverStyle = (...styles) => {
   const { ref, isHovered } = useHover();
-  // If the base style is empty, return an empty style CSSProperties.
-  if (Object.keys(style).length === 0) {
-    return {
-      refOfHover: ref,
-      styleOfHover: {},
-    };
-  }
-  // Return the reference and style CSSProperties based on the hover state.
 
   return {
-    refOfHover: ref,
-    styleOfHover: isHovered ? mergeStyles(...style) : {},
+    hoverRef: ref,
+    hoverStyle: isHovered ? mergeStyles(...styles) : {},
   };
 };
 
-const styleActive = (...style) => {
+const activeStyle = (...styles) => {
   const { ref, isActive } = useActive();
-  // If the base style is empty, return an empty style CSSProperties.
-  if (Object.keys(style).length === 0) {
-    return {
-      refOfActive: ref,
-      styleOfActive: {},
-    };
-  }
-  // Return the reference and style CSSProperties based on the active state.
+
   return {
-    refOfActive: ref,
-    styleOfActive: isActive ? mergeStyles(...style) : {},
+    activeRef: ref,
+    activeStyle: isActive ? mergeStyles(...styles) : {},
   };
 };
 
-const mergeStyles = (...args) => {
-  return Object.assign({}, ...args);
-};
+const mergeStyles = (...styles) => ({ ...styles });
 
 const animationKeyframe = (animationName, styleArrayOfCSSProperties) => {
-  const sheet = new CSSStyleSheet();
-  sheet.replaceSync(`
-      @keyframes ${animationName} {${generateKeyframeFromStyles(
-    styleArrayOfCSSProperties
-  )}}`);
-  document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
+  // 1. Use CSS.escape to prevent injection attacks
+  const escapedAnimationName = CSS.escape(animationName);
+
+  // 2. Generate keyframes using template literals
+  const keyframes = generateKeyframeFromStyles(styleArrayOfCSSProperties);
+
+  // 3. Create a new style element
+  const styleElement = document.createElement("style");
+
+  // 4. Use textContent to prevent potential XSS
+  styleElement.textContent = `@keyframes ${escapedAnimationName} {${keyframes}}`;
+
+  // 5. Check if a style element with the same animation name exists
+  const existingStyle = document.querySelector(
+    `style[data-animation="${escapedAnimationName}"]`
+  );
+
+  // 6. If it exists, update the existing style, otherwise append a new one
+  if (existingStyle) {
+    existingStyle.textContent = styleElement.textContent;
+  } else {
+    styleElement.dataset.animation = escapedAnimationName;
+    document.head.appendChild(styleElement);
+  }
+};
+
+// still in beta mood this function
+
+const applyStyles = (selector, styles) => {
+  // Parameter validation
+  if (typeof selector !== "string" || !selector.trim()) {
+    console.error("Invalid selector");
+    return;
+  }
+
+  if (typeof styles !== "object" || styles === null) {
+    console.error("Invalid styles object");
+    return;
+  }
+
+  // Remove white spaces from the selector
+  selector = selector.replaceAll(/\s/g, "");
+
+  // Set a timeout to ensure the styles are applied after the current event loop
+  setTimeout(() => {
+    const existSelector = localStorage
+      .getItem("selectors")
+      .split(",")
+      .includes(selector);
+
+    if (!existSelector) {
+      localStorage.setItem(
+        "selectors",
+        [
+          ...new Set([
+            ...localStorage.getItem("selectors").split(","),
+            selector,
+          ]),
+        ].join(",")
+      );
+    }
+
+    // Get the existing style element or create a new one
+    const existingStyleElement =
+      document.querySelector(`style[data-applied-styles="${selector}"]`) ||
+      document.createElement("style");
+
+    // Convert styles object to CSS code using a helper function
+    const cssCode = styleObjectToCss(styles);
+
+    // Append the new styles to the last style element
+    const lastStyleElementText = existingStyleElement.textContent || "";
+    const lastStyleElementWithoutPerAndSel = lastStyleElementText.substring(
+      lastStyleElementText.indexOf("{") + 1,
+      lastStyleElementText.lastIndexOf("}")
+    );
+    const lastStyleElementWithPerAndSelArray =
+      lastStyleElementWithoutPerAndSel.split(";");
+    lastStyleElementWithPerAndSelArray.splice(-1);
+    const cssCodeArray = cssCode.split(";");
+    cssCodeArray.splice(-1);
+    const combinedArray = [
+      ...lastStyleElementWithPerAndSelArray,
+      ...cssCodeArray,
+    ];
+    const uniqueArray = Array.from(new Set(combinedArray));
+    existingStyleElement.textContent = `${selector} {${uniqueArray.join(";")}}`;
+
+    // Set the data attribute
+    existingStyleElement.setAttribute("data-applied-styles", selector);
+
+    // Append the style element if it's new
+    if (!document.contains(existingStyleElement)) {
+      document.head.appendChild(existingStyleElement);
+    }
+
+    if (
+      existSelector &&
+      selector !== "*" &&
+      !["body", "html", "head"].includes(selector)
+    ) {
+      // Generate warnings if selector is not "*" and not a special element
+      const warningArray = generateWarnings(selector);
+
+      if (warningArray === null) {
+        console.error("Error in checking for common styling issue");
+      } else if (warningArray.length > 0) {
+        warningArray.flat().forEach((warning) => console.warn(warning));
+      } else {
+        console.log(`${selector} has no common styling issue`);
+      }
+    }
+  }, 0);
 };
 
 export {
@@ -1646,7 +1741,8 @@ export {
   mergeRefs,
   styles,
   mergeStyles,
-  styleHover,
-  styleActive,
+  hoverStyle,
+  activeStyle,
   animationKeyframe,
+  applyStyles,
 };

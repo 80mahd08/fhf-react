@@ -1707,9 +1707,9 @@ declare const styles: {
  * @returns {CSSProperties} An CSSProperties containing the reference and hover-based style.
  */
 
-declare function styleHover(...styles: CSSProperties[]): {
-  refOfHover: React.RefObject<any>;
-  styleOfHover: CSSProperties;
+declare function hoverStyle(...styles: CSSProperties[]): {
+  hoverRef: React.RefObject<any>;
+  hoverStyle: CSSProperties;
 };
 /**
  * Utility function for handling styles based on the active state.
@@ -1718,9 +1718,9 @@ declare function styleHover(...styles: CSSProperties[]): {
  * @returns {CSSProperties} An CSSProperties containing the reference and active state-based style.
  */
 
-declare function styleActive(...styles: CSSProperties[]): {
-  refOfActive: React.RefObject<any>;
-  styleOfActive: CSSProperties;
+declare function activeStyle(...styles: CSSProperties[]): {
+  activeRef: React.RefObject<any>;
+  activeStyle: CSSProperties;
 };
 /**
  * Function that returns a new CSSProperties that is the combination of two or more existing objects.
@@ -1740,6 +1740,8 @@ declare function animationKeyframe(
   animationName: string,
   styleArrayOfCSSProperties: CSSProperties[]
 ): void;
+
+declare function applyStyles(selector: string, styles: CSSProperties): void;
 
 export {
   ClearFix,
@@ -1764,7 +1766,8 @@ export {
   mergeRefs,
   styles,
   mergeStyles,
-  styleHover,
-  styleActive,
+  hoverStyle,
+  activeStyle,
   animationKeyframe,
+  applyStyles,
 };
