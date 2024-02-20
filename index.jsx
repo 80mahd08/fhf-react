@@ -1727,7 +1727,7 @@ const animationKeyframe = (animationName, styleArrayOfCSSProperties) => {
 
 // still in beta mode "this function
 
-const applyStyles = (selector, styles) => {
+const applyStyles = ({ selector, pseudoElement = null, styles }) => {
   // Parameter validation
   if (typeof selector !== "string" || !selector.trim()) {
     console.error("Invalid selector");
@@ -1738,9 +1738,13 @@ const applyStyles = (selector, styles) => {
     console.error("Invalid styles object");
     return;
   }
-
+  if (pseudoElement) {
+    selector =
+      selector.replaceAll(/\s/g, "") + pseudoElement.replaceAll(/\s/g, "");
+  } else {
+    selector = selector.replaceAll(/\s/g, "");
+  }
   // Remove white spaces from the selector
-  selector = selector.replaceAll(/\s/g, "");
 
   // Set a timeout to ensure the styles are applied after the current event loop
   setTimeout(() => {
