@@ -1,5 +1,5 @@
 // Import statements
-import React from "react";
+import React, { RefObject } from "react";
 import { CSSProperties } from "react";
 import GridSystemOop from "./tools/GridSystemOop";
 
@@ -113,6 +113,27 @@ declare function RespImg(props: {
  */
 declare function RespVideo(props: {
   src: string;
+  style?: React.CSSProperties;
+  className?: string;
+  [key: string]: any;
+}): JSX.Element;
+
+/**
+ * Renders a component with clipped text over an image background.
+ *
+ * @param {Object} props - The component props.
+ * @param {ReactNode} props.children - The content to be displayed over the image.
+ * @param {string} props.url - The URL of the background image.
+ * @param {string} [props.element="p"] - The HTML element type to be used (default is "p").
+ * @param {Object} [props.style={}] - Additional inline styles for the component.
+ * @param {string} [props.className=""] - Additional CSS class names for the component.
+ * @param {Object} props.otherProps - Additional props to be spread onto the rendered element.
+ * @returns {ReactNode} - The rendered component.
+ */
+declare function ClippedText(props: {
+  children: React.ReactNode;
+  url: string;
+  element?: string;
   style?: React.CSSProperties;
   className?: string;
   [key: string]: any;
@@ -269,6 +290,27 @@ declare function RespBackgImg(props: {
   [key: string]: any;
 }): JSX.Element;
 
+/**
+ * Generates a typing animation for the given text within a specified HTML element.
+ *
+ * @param {Object} props - The properties for the typing animation element.
+ * @param {string} props.text - The text to be displayed in the animation.
+ * @param {string} [props.element] - The HTML element to be used (default is "span").
+ * @param {React.CSSProperties} [props.style] - Additional styles for the HTML element.
+ * @param {string} [props.className] - Additional class name for the HTML element.
+ * @param {number} [props.speed] - The speed of the typing animation in seconds.
+ * @param {Object} [props.otherProps] - Additional props for the HTML element.
+ * @return {JSX.Element} The typing animation element.
+ */
+declare function TypingAnimationElement(props: {
+  text: string;
+  element?: string;
+  style?: React.CSSProperties;
+  className?: string;
+  speed?: number;
+  otherProps?: { [key: string]: any };
+}): JSX.Element;
+
 //custom hook
 /**
  * React Hook for responsive media queries.
@@ -310,6 +352,17 @@ declare function useHover(): {
 declare function useActive(): {
   refOfUseActive: React.RefObject<any>;
   useActiveIsActive: boolean;
+};
+
+/**
+ * Returns the current position of the mouse.
+ *
+ * @return {Object} The current x and y position of the mouse
+ */
+
+declare function useMousePosition(): {
+  x: number;
+  y: number;
 };
 
 /**
@@ -1677,6 +1730,22 @@ declare const styles: {
   roundedCard?: (bgColor: string, borderRadius: string) => CSSProperties;
 
   /**
+   * Updates the style of the sticky header based on the scroll position.
+   *
+   * @param {number} scrollThreshold - the threshold value for the scroll position
+   * @return {MutableRefObject} the reference to the sticky header element
+   */
+
+  stickyHeader?: (scrollThreshold: number) => MutableRefObject;
+
+  /**
+   * Generates a style object for grid template areas.
+   *
+   * @param {array} areas - an array of strings representing grid areas
+   * @return {object} a style object for grid template areas
+   */
+  gridTemplateAreas?: (areas: string[]) => CSSProperties;
+  /**
    * This function generates an animation property value.
    *
    * @param {string} name - The name of the animation.
@@ -1741,6 +1810,13 @@ declare function animationKeyframe(
   styleArrayOfCSSProperties: CSSProperties[]
 ): void;
 
+/**
+ * Apply styles to the specified selector after validating parameters and ensuring correct CSS formatting.
+ *
+ * @param {string} selector - The CSS selector to apply the styles to
+ * @param {object} styles - The styles to apply to the selector
+ * @return {void}
+ */
 declare function applyStyles(selector: string, styles: CSSProperties): void;
 
 export {
@@ -1770,4 +1846,6 @@ export {
   activeStyle,
   animationKeyframe,
   applyStyles,
+  TypingAnimationElement,
+  ClippedText,
 };

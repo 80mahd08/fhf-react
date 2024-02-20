@@ -1,5 +1,6 @@
 // Import statements
 import "fhf/dist/layout.min.css";
+import "fhf/dist/norm.min.css";
 import React from "react";
 import { useEffect, useState, useRef, useCallback } from "react";
 import {
@@ -15,9 +16,9 @@ import GridSystemOop from "./tools/GridSystemOop";
 import {
   styleObjectToCss,
   generateKeyframeFromStyles,
-  convertToCssKey,
 } from "./tools/animationKeyFrameTools.js";
 import { generateWarnings } from "./tools/applyStylesTools.js";
+import "./tools/cssTools.css";
 
 function ClearFix() {
   return <div className="clear-fix"></div>;
@@ -143,6 +144,34 @@ function RespVideo({ src = "", style = {}, className = "", ...otherProps }) {
       className={className}
       {...otherProps}
     />
+  );
+}
+
+function ClippedText({
+  children,
+  url,
+  element: Element = "p",
+  style = {},
+  className = "",
+  ...otherProps
+}) {
+  // Merge the background image style with additional styles
+  const mergedStyle = mergeStyles(
+    {
+      backgroundImage: `url(${url})`,
+      // Add any other background-related styles here
+    },
+    style
+  );
+
+  return (
+    <Element
+      style={mergedStyle}
+      className={`clipped-text ${className}`}
+      {...otherProps}
+    >
+      {children}
+    </Element>
   );
 }
 
@@ -380,6 +409,36 @@ function RespBackgImg({
   }
 }
 
+function TypingAnimationElement({
+  text,
+  element: Element = "span",
+  style = {},
+  className = "",
+  speed = 0.5,
+  ...otherProps
+}) {
+  const DynamicElement = Element;
+  const ref = useRef();
+  let i = 0;
+  setInterval(() => {
+    ref.current.innerHTML = ref.current.innerHTML + text[i];
+    i++;
+    if (i === text.length + 1) {
+      ref.current.innerHTML = "";
+      i = 0;
+    }
+  }, speed * 1000);
+
+  return (
+    <DynamicElement
+      ref={mergeRefs(otherProps.ref, ref)}
+      style={style}
+      className={`typing ${className}`}
+      {...otherProps}
+    ></DynamicElement>
+  );
+}
+
 function useMediaQuery(query) {
   // Initialize the state variable 'matches' with the initial match status of the media query.
   const [matches, setMatches] = useState(window.matchMedia(query).matches);
@@ -486,6 +545,24 @@ function useActive() {
   // Return an object containing a mutable reference to the DOM element and the current active state.
   return { refOfUseActive, useActiveIsActive };
 }
+
+const useMousePosition = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (event) => {
+    setMousePosition({ x: event.clientX, y: event.clientY });
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  return mousePosition;
+};
 
 function mergeRefs(...refs) {
   // Define a memoized function to set the value of each ref in the array based on the order of the refs.
@@ -1568,6 +1645,24 @@ const styles = {
     padding: "20px",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
   }),
+  stickyHeader: (scrollThreshold) => {
+    const stickyHeaderRef = useRef();
+    useEffect(() => {
+      const handleScroll = () => {
+        const isSticky = window.scrollY > scrollThreshold;
+        stickyHeaderRef.current.style.position = isSticky ? "fixed" : "static";
+      };
+
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, [scrollThreshold]);
+    return stickyHeaderRef;
+  },
+  gridTemplateAreas: (areas) => ({
+    gridTemplateAreas: areas.map((areas) => `"${areas}"`).join(" "),
+  }),
   animation: (
     name,
     duration,
@@ -1600,7 +1695,8 @@ const activeStyle = (...styles) => {
   };
 };
 
-const mergeStyles = (...styles) => ({ ...styles });
+const mergeStyles = (...styles) =>
+  Object.assign({}, ...styles.map((style) => style));
 
 const animationKeyframe = (animationName, styleArrayOfCSSProperties) => {
   // 1. Use CSS.escape to prevent injection attacks
@@ -1629,7 +1725,7 @@ const animationKeyframe = (animationName, styleArrayOfCSSProperties) => {
   }
 };
 
-// still in beta mood this function
+// still in beta mode "this function
 
 const applyStyles = (selector, styles) => {
   // Parameter validation
@@ -1718,6 +1814,8 @@ const applyStyles = (selector, styles) => {
   }, 0);
 };
 
+// CSS keyframes for text gradient animation
+
 export {
   ClearFix,
   Container,
@@ -1745,4 +1843,7 @@ export {
   activeStyle,
   animationKeyframe,
   applyStyles,
+  useMousePosition,
+  TypingAnimationElement,
+  ClippedText,
 };
