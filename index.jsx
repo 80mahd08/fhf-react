@@ -1,6 +1,8 @@
 // Import statements
+
 import "fhf/dist/layout.min.css";
 import "fhf/dist/norm.min.css";
+
 import React from "react";
 import { useEffect, useState, useRef, useCallback } from "react";
 import {
@@ -13,11 +15,7 @@ import {
   isValidAContent,
 } from "./tools/validation";
 import GridSystemOop from "./tools/GridSystemOop";
-import {
-  styleObjectToCss,
-  generateKeyframeFromStyles,
-} from "./tools/animationKeyFrameTools.js";
-import { generateWarnings } from "./tools/applyStylesTools.js";
+
 import "./tools/cssTools.css";
 
 function ClearFix() {
@@ -411,33 +409,42 @@ function RespBackgImg({
 
 function TypingAnimationElement({
   text,
-  element: Element = "span",
+  element = "span",
   style = {},
   className = "",
   speed = 0.5,
   ...otherProps
 }) {
-  const DynamicElement = Element;
-  const ref = useRef();
-  let i = 0;
-  setInterval(() => {
-    ref.current.innerHTML = ref.current.innerHTML + text[i];
-    i++;
-    if (i === text.length + 1) {
-      ref.current.innerHTML = "";
-      i = 0;
-    }
-  }, speed * 1000);
+  const [typingText, setTypingText] = useState(""); // State for current typing progress
+  const ref = useRef(null);
+
+  useEffect(() => {
+    let i = 0;
+    const intervalId = setInterval(() => {
+      setTypingText(typingText + text[i]);
+      i++;
+      if (i === text.length) {
+        clearInterval(intervalId);
+        setTypingText(""); // Reset typing text after completion
+        i = 0;
+      }
+    }, speed * 1000);
+
+    return () => clearInterval(intervalId); // Clear interval on unmount
+  }, [text, speed]); // Dependency array to re-run on text or speed changes
 
   return (
     <DynamicElement
-      ref={mergeRefs(otherProps.ref, ref)}
+      ref={ref}
       style={style}
       className={`typing ${className}`}
       {...otherProps}
-    ></DynamicElement>
+      dangerouslySetInnerHTML={{ __html: typingText }} // Use dangerouslySetInnerHTML for potential XSS concerns
+    />
   );
 }
+
+export default TypingAnimationElement;
 
 function useMediaQuery(query) {
   // Initialize the state variable 'matches' with the initial match status of the media query.
@@ -1629,7 +1636,7 @@ const styles = {
     new GridSystemOop(numColumns, gapValue),
 
   gradientText: (angle, colors) => ({
-    background: `linear-gradient(${angle}, ${colors})`,
+    backgroundImage: `linear-gradient(${angle}, ${colors})`,
     WebkitBackgroundClip: "text",
     color: "transparent",
   }),
@@ -1664,17 +1671,83 @@ const styles = {
     gridTemplateAreas: areas.map((areas) => `"${areas}"`).join(" "),
   }),
   animation: (
-    name,
-    duration,
-    timingFunction = "ease",
-    delay = 0,
-    iterationCount = 1,
-    direction = "normal",
-    fillMode = "none",
-    playState = "running"
-  ) => ({
-    animation: `${name} ${duration}s ${timingFunction}s ${delay}s ${iterationCount} ${direction} ${fillMode} ${playState}`,
-  }),
+    name, // Required for the animation name
+    options = {} // Optional object for overriding defaults
+  ) => {
+    // Define default values for animation properties:
+    const defaults = {
+      duration: "1s",
+      timingFunction: "ease",
+      delay: 0,
+      iterationCount: 1,
+      direction: "normal",
+      fillMode: "none",
+      playState: "running",
+    };
+    const validatedOptions = { ...defaults, ...options };
+
+    // Validate numeric properties
+    const validateNumber = (prop, value) => {
+      if (
+        typeof value !== "number" ||
+        isNaN(value) ||
+        (prop === "delay" && (value < 0 || value > 60))
+      ) {
+        console.warn(
+          `Invalid ${prop} value: "${value}". Using default "${defaults[prop]}".`
+        );
+        return defaults[prop];
+      }
+      return value;
+    };
+
+    validatedOptions.duration = validateNumber(
+      "duration",
+      validatedOptions.duration
+    );
+    validatedOptions.delay = validateNumber("delay", validatedOptions.delay);
+    validatedOptions.iterationCount = validateNumber(
+      "iterationCount",
+      Math.max(1, validatedOptions.iterationCount)
+    ); // Ensure iterationCount is at least 1
+
+    // Validate string properties with allowed values
+    const validateString = (prop, value, allowedValues) => {
+      if (typeof value !== "string" || !allowedValues.includes(value.trim())) {
+        console.warn(
+          `Invalid ${prop}: "${value}". Using default "${defaults[prop]}".`
+        );
+        return defaults[prop];
+      }
+      return value.trim();
+    };
+
+    validatedOptions.timingFunction = validateString(
+      "timingFunction",
+      validatedOptions.timingFunction,
+      ["linear", "ease", "ease-in", "ease-out", "ease-in-out"]
+    );
+    validatedOptions.direction = validateString(
+      "direction",
+      validatedOptions.direction,
+      ["normal", "reverse", "alternate", "alternate-reverse"]
+    );
+    validatedOptions.fillMode = validateString(
+      "fillMode",
+      validatedOptions.fillMode,
+      ["none", "forwards", "backwards", "both"]
+    );
+    validatedOptions.playState = validateString(
+      "playState",
+      validatedOptions.playState,
+      ["running", "paused"]
+    );
+
+    // Build the animation string
+    const animation = `${name} ${validatedOptions.duration} ${validatedOptions.timingFunction} ${validatedOptions.delay}s ${validatedOptions.iterationCount} ${validatedOptions.direction} ${validatedOptions.fillMode} ${validatedOptions.playState}`;
+
+    return { animation };
+  },
 };
 
 const hoverStyle = (...styles) => {
@@ -1698,128 +1771,6 @@ const activeStyle = (...styles) => {
 const mergeStyles = (...styles) =>
   Object.assign({}, ...styles.map((style) => style));
 
-const animationKeyframe = (animationName, styleArrayOfCSSProperties) => {
-  // 1. Use CSS.escape to prevent injection attacks
-  const escapedAnimationName = CSS.escape(animationName);
-
-  // 2. Generate keyframes using template literals
-  const keyframes = generateKeyframeFromStyles(styleArrayOfCSSProperties);
-
-  // 3. Create a new style element
-  const styleElement = document.createElement("style");
-
-  // 4. Use textContent to prevent potential XSS
-  styleElement.textContent = `@keyframes ${escapedAnimationName} {${keyframes}}`;
-
-  // 5. Check if a style element with the same animation name exists
-  const existingStyle = document.querySelector(
-    `style[data-animation="${escapedAnimationName}"]`
-  );
-
-  // 6. If it exists, update the existing style, otherwise append a new one
-  if (existingStyle) {
-    existingStyle.textContent = styleElement.textContent;
-  } else {
-    styleElement.dataset.animation = escapedAnimationName;
-    document.head.appendChild(styleElement);
-  }
-};
-
-// still in beta mode "this function
-
-const applyStyles = ({ selector, pseudoElement = null, styles }) => {
-  // Parameter validation
-  if (typeof selector !== "string" || !selector.trim()) {
-    console.error("Invalid selector");
-    return;
-  }
-
-  if (typeof styles !== "object" || styles === null) {
-    console.error("Invalid styles object");
-    return;
-  }
-  if (pseudoElement) {
-    selector =
-      selector.replaceAll(/\s/g, "") + pseudoElement.replaceAll(/\s/g, "");
-  } else {
-    selector = selector.replaceAll(/\s/g, "");
-  }
-  // Remove white spaces from the selector
-
-  // Set a timeout to ensure the styles are applied after the current event loop
-  setTimeout(() => {
-    const existSelector = localStorage
-      .getItem("selectors")
-      .split(",")
-      .includes(selector);
-
-    if (!existSelector) {
-      localStorage.setItem(
-        "selectors",
-        [
-          ...new Set([
-            ...localStorage.getItem("selectors").split(","),
-            selector,
-          ]),
-        ].join(",")
-      );
-    }
-
-    // Get the existing style element or create a new one
-    const existingStyleElement =
-      document.querySelector(`style[data-applied-styles="${selector}"]`) ||
-      document.createElement("style");
-
-    // Convert styles object to CSS code using a helper function
-    const cssCode = styleObjectToCss(styles);
-
-    // Append the new styles to the last style element
-    const lastStyleElementText = existingStyleElement.textContent || "";
-    const lastStyleElementWithoutPerAndSel = lastStyleElementText.substring(
-      lastStyleElementText.indexOf("{") + 1,
-      lastStyleElementText.lastIndexOf("}")
-    );
-    const lastStyleElementWithPerAndSelArray =
-      lastStyleElementWithoutPerAndSel.split(";");
-    lastStyleElementWithPerAndSelArray.splice(-1);
-    const cssCodeArray = cssCode.split(";");
-    cssCodeArray.splice(-1);
-    const combinedArray = [
-      ...lastStyleElementWithPerAndSelArray,
-      ...cssCodeArray,
-    ];
-    const uniqueArray = Array.from(new Set(combinedArray));
-    existingStyleElement.textContent = `${selector} {${uniqueArray.join(";")}}`;
-
-    // Set the data attribute
-    existingStyleElement.setAttribute("data-applied-styles", selector);
-
-    // Append the style element if it's new
-    if (!document.contains(existingStyleElement)) {
-      document.head.appendChild(existingStyleElement);
-    }
-
-    if (
-      existSelector &&
-      selector !== "*" &&
-      !["body", "html", "head"].includes(selector)
-    ) {
-      // Generate warnings if selector is not "*" and not a special element
-      const warningArray = generateWarnings(selector);
-
-      if (warningArray === null) {
-        console.error("Error in checking for common styling issue");
-      } else if (warningArray.length > 0) {
-        warningArray.flat().forEach((warning) => console.warn(warning));
-      } else {
-        console.log(`${selector} has no common styling issue`);
-      }
-    }
-  }, 0);
-};
-
-// CSS keyframes for text gradient animation
-
 export {
   ClearFix,
   Container,
@@ -1842,12 +1793,10 @@ export {
   useMediaStyle,
   mergeRefs,
   styles,
-  mergeStyles,
   hoverStyle,
   activeStyle,
-  animationKeyframe,
-  applyStyles,
   useMousePosition,
   TypingAnimationElement,
   ClippedText,
+  mergeStyles,
 };

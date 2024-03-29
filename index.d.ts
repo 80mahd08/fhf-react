@@ -1,5 +1,5 @@
 // Import statements
-import React, { RefObject } from "react";
+import React from "react";
 import { CSSProperties } from "react";
 import GridSystemOop from "./tools/GridSystemOop";
 
@@ -1746,27 +1746,31 @@ declare const styles: {
    */
   gridTemplateAreas?: (areas: string[]) => CSSProperties;
   /**
-   * This function generates an animation property value.
+   * This function generates an animation property value with validation and defaults.
    *
-   * @param {string} name - The name of the animation.
-   * @param {number} duration - The duration of the animation in seconds.
-   * @param {string} timingFunction - The timing function of the animation.
-   * @param {number} delay - The delay of the animation in seconds.
-   * @param {number} iterationCount - The number of times the animation should repeat.
-   * @param {string} direction - The direction of the animation.
-   * @param {string} fillMode - The fill mode of the animation.
-   * @param {string} playState - The play state of the animation.
-   * @return {CSSProperties} The generated animation property value.
+   * @param {string} name - The required name of the animation.
+   * @param options?: {
+   *   duration?: number;          // Duration in seconds (default: 1s)
+   *   timingFunction?: string;   // Timing function (default: "ease")
+   *   delay?: number;            // Delay in seconds (default: 0)
+   *   iterationCount?: number;   // Number of times to repeat (default: 1)
+   *   direction?: string;        // Animation direction (default: "normal")
+   *   fillMode?: string;         // Animation fill mode (default: "none")
+   *   playState?: string;        // Play state (default: "running")
+   * } - Optional options for overriding defaults.
+   * @returns {CSSProperties} The generated animation property value.
    */
-  animation?: (
+  animation: (
     name: string,
-    duration: number,
-    timingFunction?: string,
-    delay?: number,
-    iterationCount?: number,
-    direction?: string,
-    fillMode?: string,
-    playState?: string
+    options?: {
+      duration?: number;
+      timingFunction?: string;
+      delay?: number;
+      iterationCount?: number;
+      direction?: string;
+      fillMode?: string;
+      playState?: string;
+    }
   ) => CSSProperties;
 };
 /**
@@ -1799,26 +1803,6 @@ declare function activeStyle(...styles: CSSProperties[]): {
 
 declare function mergeStyles(...styles: CSSProperties[]): CSSProperties;
 
-/**
- * Generates a keyframe animation and adds it to the document's adopted style sheets.
- * @param {string} animationName - The name of the keyframe animation.
- * @param {Array<CSSProperties>} styleArrayOfCSSProperties - An array of objects representing the CSS properties of each keyframe.
- * @return {void} This function does not return anything.
- */
-declare function animationKeyframe(
-  animationName: string,
-  styleArrayOfCSSProperties: CSSProperties[]
-): void;
-
-/**
- * Apply styles to the specified selector after validating parameters and ensuring correct CSS formatting.
- *
- * @param {string} selector - The CSS selector to apply the styles to
- * @param {object} styles - The styles to apply to the selector
- * @return {void}
- */
-declare function applyStyles(selector: string, styles: CSSProperties): void;
-
 export {
   ClearFix,
   Container,
@@ -1844,8 +1828,7 @@ export {
   mergeStyles,
   hoverStyle,
   activeStyle,
-  animationKeyframe,
-  applyStyles,
+  useMousePosition,
   TypingAnimationElement,
   ClippedText,
 };
