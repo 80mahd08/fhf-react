@@ -1,8 +1,8 @@
-<h1 style="text-align:center">FHF-REACT</h1>
+<h1 align="center">FHF-REACT</h1>
 
-<p align="center">
-  <img width="300" src="https://raw.githubusercontent.com/80mahd08/fhf-react/main/logo.png" />
-</p>
+<div align="center">
+  <img width="300" src="./logo.png" />
+</div>
 
 ## Introduction
 
@@ -48,7 +48,7 @@ A responsive div component with visibility and hidden classes based on different
 
 ```jsx
 <DivV visibleIn="md" hiddenIn="lg">
-  {/* Your content goes here */}
+	{/* Your content goes here */}
 </DivV>
 ```
 
@@ -74,7 +74,7 @@ A responsive grid component with a specified column size and optional gap betwee
 
 ```jsx
 <RespGridFill size={100} gap={20}>
-  {/* Grid items go here */}
+	{/* Grid items go here */}
 </RespGridFill>
 ```
 
@@ -84,7 +84,7 @@ Similar to RespGridFill, but with auto-fitting columns.
 
 ```jsx
 <RespGridFit size={100} gap={20}>
-  {/* Grid items go here */}
+	{/* Grid items go here */}
 </RespGridFit>
 ```
 
@@ -126,7 +126,7 @@ A responsive background image component for specified HTML elements.
 
 ```jsx
 <RespBackgImg element="div" url="path/*">
-  {/* Your content goes here */}
+	{/* Your content goes here */}
 </RespBackgImg>
 ```
 
@@ -136,33 +136,32 @@ A responsive background image component for specified HTML elements.
 
 ```jsx
 import {
-  styles,
-  mergeStyles,
-  styleHover,
-  styleActive,
-  mergeRefs,
+	styles,
+	mergeStyles,
+	styleHover,
+	styleActive,
+	mergeRefs,
 } from "fhf-react";
 
 const Comp = () => {
-  const { refLightHover, styleLightHover } = styles.bgLightHover();
-  const { refOfActive, styleOfActive } = styleActive(
-    styles.extremeRounded,
-    styles.bg("green")
-  );
+	const { refLightHover, styleLightHover } = styles.bgLightHover();
+	const { refOfActive, styleOfActive } = styleActive(
+		styles.extremeRounded,
+		styles.bg("green")
+	);
 
-  return (
-    <div
-      ref={mergeRefs(refLightHover, refOfActive)}
-      style={mergeStyles(
-        styles.centerPosition,
-        styles.fitContentHW,
-        styleLightHover,
-        styleOfActive
-      )}
-    >
-      {/* Your centered content goes here */}
-    </div>
-  );
+	return (
+		<div
+			ref={mergeRefs(refLightHover, refOfActive)}
+			style={mergeStyles(
+				styles.centerPosition,
+				styles.fitContentHW,
+				styleLightHover,
+				styleOfActive
+			)}>
+			{/* Your centered content goes here */}
+		</div>
+	);
 };
 
 export default Comp;
