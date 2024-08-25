@@ -1,16 +1,20 @@
+::root {
+	--typing-color: black;
+}
 .typing::after {
-  content: "|";
-  animation: blink 1.2s infinite;
+	content: "|";
+	animation: blink 1.2s infinite;
+	color: var(--typing-color);
 }
 @keyframes blink {
-  50% {
-    opacity: 0;
-  }
+	50% {
+		opacity: 0;
+	}
 }
 
 .clipped-text {
-  background-size: cover;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+	background-size: cover;
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
 }
