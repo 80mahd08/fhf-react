@@ -6,8 +6,8 @@ import {
 	isValidTextTransform,
 	isValidJContent,
 	isValidAContent,
-} from "./tools/validation";
-import GridSystemOop from "./tools/GridSystemOop";
+} from "../tools/validation";
+import GridSystemOop from "../tools/GridSystemOop";
 
 const styles = {
 	centerPosition: {

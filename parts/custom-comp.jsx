@@ -6,7 +6,7 @@ import "fhf/dist/flexbox.css";
 import React from "react";
 import { useEffect, useState } from "react";
 
-import "./tools/cssTools.css";
+import "../tools/cssTools.css";
 import { mergeStyles } from "./custom-func";
 
 function ClearFix() {
