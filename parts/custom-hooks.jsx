@@ -1,4 +1,4 @@
-import { useRef, useCallback, useState } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 
 function useMediaQuery(query) {
 	// Initialize the state variable 'matches' with the initial match status of the media query.
