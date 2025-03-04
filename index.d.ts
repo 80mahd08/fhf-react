@@ -139,9 +139,9 @@ declare function ClippedText(props: {
   [key: string]: any;
 }): JSX.Element;
 
-// RespGridFill component
+// RespGrid component
 /**
- * A responsive grid component with automatic column sizing based on the specified size and gap, using auto-fill.
+ * A responsive grid component with automatic column sizing based on the specified size and gap
  * @param {Object} props - The component props.
  * @param {React.ReactNode} props.children - The child elements to be displayed inside the grid.
  * @param {number} props.size - The size of each grid item in pixels.
@@ -150,32 +150,13 @@ declare function ClippedText(props: {
  * @param {string} props.className - The additional CSS class to be applied to the grid.
  * @returns {JSX.Element} A div element with the specified child elements and styles.
  */
-declare function RespGridFill(props: {
+declare function RespGrid(props: {
   children: React.ReactNode;
   size: number;
   style?: React.CSSProperties;
   gap: number;
   className?: string;
-  [key: string]: any;
-}): JSX.Element;
-
-// RespGridFit component
-/**
- * A responsive grid component with automatic column sizing based on the specified size and gap, using auto-fit.
- * @param {Object} props - The component props.
- * @param {React.ReactNode} props.children - The child elements to be displayed inside the grid.
- * @param {number} props.size - The size of each grid item in pixels.
- * @param {Object} props.style - The CSS styles to be applied to the grid.
- * @param {number} props.gap - The gap between grid items in pixels.
- * @param {string} props.className - The additional CSS class to be applied to the grid.
- * @returns {JSX.Element} A div element with the specified child elements and styles.
- */
-declare function RespGridFit(props: {
-  children: React.ReactNode;
-  size: number;
-  style?: React.CSSProperties;
-  gap: number;
-  className?: string;
+  type: "fit" | "fill";
   [key: string]: any;
 }): JSX.Element;
 
@@ -339,7 +320,7 @@ declare function useMediaStyle(
  */
 
 declare function useHover(): {
-  refOfUseHover: React.RefObject<any>;
+  refOfUseHover: React.RefObject<HTMLElement>;
   useHoverIsHovered: boolean;
 };
 
@@ -350,7 +331,7 @@ declare function useHover(): {
  */
 
 declare function useActive(): {
-  refOfUseActive: React.RefObject<any>;
+  refOfUseActive: React.RefObject<HTMLElement>;
   useActiveIsActive: boolean;
 };
 
@@ -375,11 +356,6 @@ declare function useMousePosition(): {
 declare function mergeRefs(
   ...refs: React.RefObject<any>[]
 ): React.RefObject<any>;
-
-type GridSystemFunction = (
-  numColumns?: number,
-  gapValue?: number
-) => GridSystemOop;
 
 declare const styles: {
   /**
@@ -1696,14 +1672,6 @@ declare const styles: {
    * @returns {GridSystem} Styles for the grid system.
    */
 
-  gridSystem?: GridSystemFunction;
-  /**
-   * Create text with a gradient effect.
-   * @param {string} angle - Gradient angle (e.g., 'to right', '45deg').
-   * @param {string} colors - Comma-separated list of gradient colors (e.g., 'red, blue').
-   * @returns {CSSProperties} - CSS styles for text with a gradient effect.
-   */
-
   gradientText?: (angle: string, colors: string) => CSSProperties;
   /**
    * Set responsive spacing between flex items and gird items.
@@ -1811,8 +1779,7 @@ export {
   DivV,
   RespImg,
   RespVideo,
-  RespGridFill,
-  RespGridFit,
+  RespGrid,
   UnstyledList,
   NavUl,
   RespHeading,

@@ -1,51 +1,51 @@
 {
-	"name": "fhf-react",
-	"version": "2.0.4",
-	"description": "this react framework has  React components and styles designed to facilitate the creation of responsive and flexible web layouts. Tailored for ease of use and versatility, the framework includes components for containers, flexible layouts, responsive images and videos, grid systems, navigation, and more. By incorporating predefined styles, the framework simplifies common layout tasks such as centering content, text alignment, floats, and flexbox arrangements. With a focus on responsiveness, the framework adapts to different screen sizes and provides a set of utility functions for managing visibility based on screen dimensions. Whether you're building a simple webpage or a complex web application, this framework aims to streamline the development process by offering a cohesive set of components and styles for creating modern and responsive user interfaces.",
-	"main": "index.jsx",
-	"files": [
-		"./parts/custom-comp.jsx",
-		"./parts/custom-func.jsx",
-		"./parts/custom-hooks.jsx",
-		"./parts/styles.js",
-		"./index.d.ts",
-		"./tools"
-	],
-	"type": "module",
-	"types": "index.d.ts",
-	"dependencies": {
-		"fhf": "^2.0.2",
-		"js-tokens": "^4.0.0",
-		"loose-envify": "^1.4.0",
-		"object-assign": "^4.1.1",
-		"react": "^18.2.0",
-		"react-is": "^16.13.1"
-	},
-	"scripts": {
-		"res": "npm uninstall fhf | npm i fhf"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/80mahd08/fhf-react.git"
-	},
-	"keywords": [
-		"responsive",
-		"display",
-		"framework",
-		"react",
-		"web",
-		"layout",
-		"responsive",
-		"flexbox",
-		"grid",
-		"layout",
-		"js",
-		"css"
-	],
-	"author": "Mahdi Amari",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/80mahd08/fhf-react/issues"
-	},
-	"homepage": "https://github.com/80mahd08/fhf-react#readme"
+  "name": "fhf-react",
+  "version": "2.1.0",
+  "description": "this react framework has  React components and styles designed to facilitate the creation of responsive and flexible web layouts. Tailored for ease of use and versatility, the framework includes components for containers, flexible layouts, responsive images and videos, grid systems, navigation, and more. By incorporating predefined styles, the framework simplifies common layout tasks such as centering content, text alignment, floats, and flexbox arrangements. With a focus on responsiveness, the framework adapts to different screen sizes and provides a set of utility functions for managing visibility based on screen dimensions. Whether you're building a simple webpage or a complex web application, this framework aims to streamline the development process by offering a cohesive set of components and styles for creating modern and responsive user interfaces.",
+  "main": "index.jsx",
+  "files": [
+    "index.jsx",
+    "index.d.ts",
+    "./parts",
+    "./tools"
+  ],
+  "type": "module",
+  "types": "index.d.ts",
+  "dependencies": {
+    "fhf": "2.0.2",
+    "js-tokens": "4.0.0",
+    "lodash.merge": "^4.6.2",
+    "loose-envify": "1.4.0",
+    "object-assign": "4.1.1",
+    "react": "18.2.0",
+    "react-is": "16.13.1",
+    "tinycolor2": "^1.6.0"
+  },
+  "scripts": {
+    "res": "npm uninstall fhf | npm i fhf"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/80mahd08/fhf-react.git"
+  },
+  "keywords": [
+    "responsive",
+    "display",
+    "framework",
+    "react",
+    "web",
+    "layout",
+    "responsive",
+    "flexbox",
+    "grid",
+    "layout",
+    "js",
+    "css"
+  ],
+  "author": "Mahdi Amari",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/80mahd08/fhf-react/issues"
+  },
+  "homepage": "https://github.com/80mahd08/fhf-react#readme"
 }

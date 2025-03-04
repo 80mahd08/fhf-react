@@ -1,20 +1,32 @@
-::root {
-	--typing-color: black;
+:root {
+  --typing-color: black;
+  --typing-cursor-color: black;
+  --typing-blink-speed: 1.2s;
 }
+
 .typing::after {
-	content: "|";
-	animation: blink 1.2s infinite;
-	color: var(--typing-color);
+  content: "|";
+  animation: blink var(--typing-blink-speed) infinite;
+  color: var(--typing-cursor-color);
 }
+
 @keyframes blink {
-	50% {
-		opacity: 0;
-	}
+  50% {
+    opacity: 0;
+  }
 }
 
 .clipped-text {
-	background-size: cover;
-	background-clip: text;
-	-webkit-background-clip: text;
-	color: transparent;
+  background-size: cover;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -ms-background-clip: text;
+  color: transparent;
+
+  /* Fallback for unsupported browsers */
+  @supports not (background-clip: text) {
+    color: inherit;
+    background: none;
+  }
 }

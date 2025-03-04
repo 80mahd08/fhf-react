@@ -1,26 +1,18 @@
+import tinycolor from "tinycolor2";
+
 /**
  * Checks if a given color string is a valid color.
  * @param {string} color - The color string to be checked.
  * @returns {boolean} - Returns true if the color is valid, false otherwise.
  */
-const isValidColor = (color) => {
-  // Regular expression to check for a valid color in various formats
-  if (color === "" || color === undefined) {
-    return false;
-  }
-  const colorRegex =
-    /^(#([0-9a-fA-F]{3}){1,2}|[a-zA-Z]+|rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)|rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*(0(\.\d+)?|1(\.0+)?)\)|hsl\(\s*\d+\s*,\s*\d+%?\s*,\s*\d+%?\s*\)|hsla\(\s*\d+\s*,\s*\d+%?\s*,\s*\d+%?\s*,\s*(0(\.\d+)?|1(\.0+)?)\))$/;
-  return colorRegex.test(color);
-};
-
+const isValidColor = (color) => tinycolor(color).isValid();
 /**
  * Checks if a given size is a valid size.
  * @param {number} size - The size to be checked.
  * @returns {boolean} - Returns true if the size is valid, false otherwise.
  */
-const isValidSize = (size) => {
-  return typeof size === "number" && size >= 0;
-};
+const isValidSize = (size) =>
+  typeof size === "number" && size >= 0 && isFinite(size) && !isNaN(size);
 
 /**
  * Checks if a given border style is a valid border style.
